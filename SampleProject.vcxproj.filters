@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{d7533638-0bb8-46b7-b651-103793212d30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Title">
+      <UniqueIdentifier>{26f0b010-28f7-47fb-94b0-35dc7c0276e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Battle">
+      <UniqueIdentifier>{0b25de6b-50b9-46f8-b470-51c3e7ee5d3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Adventure">
+      <UniqueIdentifier>{0a36c80e-ef55-47c3-be14-e7d1a67aed8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseProgram">
+      <UniqueIdentifier>{e6753dcd-f30d-4025-9e83-1c037e6723dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseProgram\Component">
+      <UniqueIdentifier>{3dbdbee7-57dd-429d-b067-429c064e9b5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\LoadScene">
+      <UniqueIdentifier>{080836c2-f441-4829-ad03-6cee6f62e314}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TitleMenuSpriteComponent.cpp">
+      <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleMenu.cpp">
+      <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleScene.cpp">
+      <Filter>Scene\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="AdventureScene.cpp">
+      <Filter>Scene\Adventure</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleCharacter.cpp">
+      <Filter>Scene\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Scene\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Scene\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>BaseProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>BaseProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>BaseProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>BaseProgram\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadScene.cpp">
+      <Filter>Scene\LoadScene</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>BaseProgram\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimSpriteComponent.cpp">
+      <Filter>BaseProgram\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="BGSpriteComponent.cpp">
+      <Filter>BaseProgram\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>BaseProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="StoryFlag.cpp">
+      <Filter>BaseProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageWindow.cpp">
+      <Filter>Scene\Adventure</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleMessageWindow.cpp">
+      <Filter>Scene\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleMenuSpriteComponent.cpp">
+      <Filter>Scene\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectSpriteComponent.cpp">
+      <Filter>Scene\Adventure</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleHP.cpp">
+      <Filter>Scene\Battle</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TitleMenu.h">
+      <Filter>Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleMenuSpriteComponent.h">
+      <Filter>Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleScene.h">
+      <Filter>Scene\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="AdventureScene.h">
+      <Filter>Scene\Adventure</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleCharacter.h">
+      <Filter>Scene\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Scene\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Scene\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>BaseProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>BaseProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>BaseProgram\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadScene.h">
+      <Filter>Scene\LoadScene</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>BaseProgram\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimSpriteComponent.h">
+      <Filter>BaseProgram\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="BGSpriteComponent.h">
+      <Filter>BaseProgram\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>BaseProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="StoryFlag.h">
+      <Filter>BaseProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageWindow.h">
+      <Filter>Scene\Adventure</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleMessageWindow.h">
+      <Filter>Scene\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleMenuSpriteComponent.h">
+      <Filter>Scene\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectSpriteComponent.h">
+      <Filter>Scene\Adventure</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleHP.h">
+      <Filter>Scene\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="ImgPath.h">
+      <Filter>Scene\Adventure</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
