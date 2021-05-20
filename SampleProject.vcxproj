@@ -149,7 +149,6 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AdventureScene.cpp" />
-    <ClCompile Include="AnimSpriteComponent.cpp" />
     <ClCompile Include="BattleCharacter.cpp" />
     <ClCompile Include="BattleMenuSpriteComponent.cpp" />
     <ClCompile Include="BattleMessageWindow.cpp" />
@@ -165,18 +164,15 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SelectSpriteComponent.cpp" />
+    <ClCompile Include="SelectMenu.cpp" />
     <ClCompile Include="StoryFlag.cpp" />
     <ClCompile Include="BattleHP.cpp" />
-    <ClCompile Include="TitleMenu.cpp" />
-    <ClCompile Include="TitleMenuSpriteComponent.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="AdventureScene.h" />
-    <ClInclude Include="AnimSpriteComponent.h" />
     <ClInclude Include="BattleCharacter.h" />
     <ClInclude Include="BattleMenuSpriteComponent.h" />
     <ClInclude Include="BattleMessageWindow.h" />
@@ -192,11 +188,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SelectSpriteComponent.h" />
+    <ClInclude Include="SelectMenu.h" />
     <ClInclude Include="StoryFlag.h" />
     <ClInclude Include="BattleHP.h" />
-    <ClInclude Include="TitleMenu.h" />
-    <ClInclude Include="TitleMenuSpriteComponent.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>

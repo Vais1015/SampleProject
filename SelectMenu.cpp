@@ -1,34 +1,7 @@
 #include "Game.h"
 #include "Actor.h"
-#include "SelectSpriteComponent.h"
+#include "SelectMenu.h"
 #include <iostream>
-
-SelectMenu::SelectMenu(Game* game)
-	:Actor(game)
-{
-	ssc = new SelectSpriteComponent(this);
-}
-
-bool SelectMenu::GetCanInput() const
-{
-	return ssc->GetCanInput();
-}
-
-bool SelectMenu::GetIsTop() const
-{
-	return ssc->GetIsTop();
-}
-
-void SelectMenu::SetTextures(std::string tb, std::string t, std::string bb, std::string b)
-{
-	ssc->SetTextures(tb, t, bb, b);
-}
-
-void SelectMenu::SetMenuVisualization(bool visualization)
-{
-	ssc->SetMenuVisualization(visualization);
-}
-
 
 SelectSpriteComponent::SelectSpriteComponent(class Actor* owner, int drawOrder)
 	:SpriteComponent(owner, SDL_FLIP_NONE, drawOrder)
@@ -85,6 +58,8 @@ void SelectSpriteComponent::ProcessInput(const uint8_t* keyState)
 //	セレクトされているかを判定した後、適切な画像を表示
 void SelectSpriteComponent::Draw(SDL_Renderer* renderer)
 {
+	int i = 0;
+
 	for (auto& st : mSelectMenuTextures)
 	{
 		SDL_Rect r;
@@ -92,8 +67,8 @@ void SelectSpriteComponent::Draw(SDL_Renderer* renderer)
 		SDL_QueryTexture(st.notSelTex, nullptr, nullptr, &iw, &ih);
 		r.w = static_cast<int>(iw);
 		r.h = static_cast<int>(ih);
-		r.x = static_cast<int>(mOwner->GetCentralPosition().x - r.w / 2 + st.pos.x);
-		r.y = static_cast<int>(mOwner->GetCentralPosition().y - r.h / 2 + st.pos.y);
+		r.x = static_cast<int>(mOwner->GetCentralPosition().x - r.w / 2);
+		r.y = static_cast<int>(mOwner->GetCentralPosition().y - r.h / 2 - 30 + (100 * i));
 
 		if (st.isSelecting)
 		{
@@ -103,6 +78,8 @@ void SelectSpriteComponent::Draw(SDL_Renderer* renderer)
 		{
 			SDL_RenderCopy(renderer, st.notSelTex, nullptr, &r);
 		}
+
+		++i;
 	}
 }
 
@@ -147,9 +124,6 @@ void SelectSpriteComponent::SetTextures(std::string tb, std::string t, std::stri
 
 		temp.isSelecting = false;
 
-		temp.pos.x = (float)mOwner->GetGame()->GetWindowWidth() / 2.0f;
-		temp.pos.y = (float)(mOwner->GetGame()->GetWindowHeight() / 6.5f) * (i + 4.5f);
-
 		if (i == 0)
 		{
 			temp.isTop = true;
@@ -180,8 +154,6 @@ void SelectSpriteComponent::SetMenuVisualization(bool visualization)
 			SDL_SetTextureAlphaMod(i.nowSelTex, 255);
 			SDL_SetTextureAlphaMod(i.notSelTex, 255);
 		}
-
-		mNowTexItr = mSelectMenuTextures.begin();
 
 		mCanInput = true;
 	}

@@ -22,7 +22,6 @@ private:
 	float mScale = 2.0f;
 	int mDrawOrder = 120;
 
-	BattleMenuSpriteComponent* mBM;
 	std::vector<Arts> mArts;
 
 	//	inputがあってからのインターバル

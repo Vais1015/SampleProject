@@ -15,5 +15,5 @@ public:
 	void SceneOutput(SDL_Renderer* renderer) override;
 
 private:
-	class TitleMenu* mTitleMenu;
+	class SelectSpriteComponent* mSM;
 };

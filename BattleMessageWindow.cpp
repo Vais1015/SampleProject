@@ -97,3 +97,20 @@ void BattleMessageWindow::SetTexture(SDL_Renderer* renderer,int i)
 
     SDL_FreeSurface(surface);
 }
+
+//  Getter
+bool BattleMessageWindow::GetRemainingText() const
+{
+    if (!mBattleTexts.empty() && !mTextTexture.empty())
+    {
+        return true;
+    }
+    else if(mBattleTexts.empty() && mTextTexture.empty())
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}

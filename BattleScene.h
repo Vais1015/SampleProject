@@ -19,6 +19,7 @@ public:
 	class Player* GetPlayer() const;
 	class Enemy* GetEnemy() const;
 	class BattleMessageWindow* GetMessageWindow() const;
+	class BattleMenuSpriteComponent* GetSelectMenu() const;
 	TTF_Font* GetFont() const;
 
 	//	Setter
@@ -28,6 +29,7 @@ private:
 	class Player* mPlayer;
 	class Enemy* mEnemy;
 	class BattleMessageWindow* mMessageWindow;
+	class BattleMenuSpriteComponent* mBM;
 
 	bool mFinished;
 	TTF_Font* mFont;

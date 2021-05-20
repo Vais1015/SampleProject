@@ -339,10 +339,18 @@ SDL_Texture* Game::SetTexture(std::string fileName)
 	return texture;
 }
 
-void Game::SetIsRunning(bool isRunning) { mIsRunning = isRunning; }
-void Game::SetUpdatingActors(bool updatingActors) { mUpdatingActors = updatingActors; }
+void Game::SetIsRunning(bool isRunning) 
+{
+	mIsRunning = isRunning; 
+}
+
+void Game::SetUpdatingActors(bool updatingActors) 
+{
+	mUpdatingActors = updatingActors; 
+}
 
 void Game::SetInputTime()
 {
 	mInputTime = SDL_GetTicks();
 }
+

@@ -13,24 +13,21 @@
     <Filter Include="Scene\Adventure">
       <UniqueIdentifier>{0a36c80e-ef55-47c3-be14-e7d1a67aed8a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BaseProgram">
-      <UniqueIdentifier>{e6753dcd-f30d-4025-9e83-1c037e6723dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BaseProgram\Component">
-      <UniqueIdentifier>{3dbdbee7-57dd-429d-b067-429c064e9b5e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene\LoadScene">
       <UniqueIdentifier>{080836c2-f441-4829-ad03-6cee6f62e314}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{e6753dcd-f30d-4025-9e83-1c037e6723dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{052dbe35-8813-46d8-9522-08469fb5543e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{401de84f-0d55-4fe3-b0d5-082b27d41a44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TitleMenuSpriteComponent.cpp">
-      <Filter>Scene\Title</Filter>
-    </ClCompile>
     <ClCompile Include="TitleScene.cpp">
-      <Filter>Scene\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleMenu.cpp">
       <Filter>Scene\Title</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
@@ -55,34 +52,19 @@
       <Filter>Scene\Battle</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>BaseProgram</Filter>
+      <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>BaseProgram</Filter>
-    </ClCompile>
-    <ClCompile Include="Math.cpp">
-      <Filter>BaseProgram</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>BaseProgram\Component</Filter>
+      <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="LoadScene.cpp">
       <Filter>Scene\LoadScene</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteComponent.cpp">
-      <Filter>BaseProgram\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimSpriteComponent.cpp">
-      <Filter>BaseProgram\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="BGSpriteComponent.cpp">
-      <Filter>BaseProgram\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Actor.cpp">
-      <Filter>BaseProgram</Filter>
+      <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="StoryFlag.cpp">
-      <Filter>BaseProgram</Filter>
+      <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="MessageWindow.cpp">
       <Filter>Scene\Adventure</Filter>
@@ -93,21 +75,27 @@
     <ClCompile Include="BattleMenuSpriteComponent.cpp">
       <Filter>Scene\Battle</Filter>
     </ClCompile>
-    <ClCompile Include="SelectSpriteComponent.cpp">
-      <Filter>Scene\Adventure</Filter>
-    </ClCompile>
     <ClCompile Include="BattleHP.cpp">
       <Filter>Scene\Battle</Filter>
     </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="BGSpriteComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectMenu.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TitleMenu.h">
-      <Filter>Scene\Title</Filter>
-    </ClInclude>
     <ClInclude Include="TitleScene.h">
-      <Filter>Scene\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleMenuSpriteComponent.h">
       <Filter>Scene\Title</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
@@ -132,31 +120,16 @@
       <Filter>Scene\Battle</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>BaseProgram</Filter>
-    </ClInclude>
-    <ClInclude Include="Math.h">
-      <Filter>BaseProgram</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>BaseProgram\Component</Filter>
+      <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="LoadScene.h">
       <Filter>Scene\LoadScene</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteComponent.h">
-      <Filter>BaseProgram\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimSpriteComponent.h">
-      <Filter>BaseProgram\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="BGSpriteComponent.h">
-      <Filter>BaseProgram\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Actor.h">
-      <Filter>BaseProgram</Filter>
+      <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="StoryFlag.h">
-      <Filter>BaseProgram</Filter>
+      <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="MessageWindow.h">
       <Filter>Scene\Adventure</Filter>
@@ -167,14 +140,26 @@
     <ClInclude Include="BattleMenuSpriteComponent.h">
       <Filter>Scene\Battle</Filter>
     </ClInclude>
-    <ClInclude Include="SelectSpriteComponent.h">
-      <Filter>Scene\Adventure</Filter>
-    </ClInclude>
     <ClInclude Include="BattleHP.h">
       <Filter>Scene\Battle</Filter>
     </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="BGSpriteComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
     <ClInclude Include="ImgPath.h">
-      <Filter>Scene\Adventure</Filter>
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectMenu.h">
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

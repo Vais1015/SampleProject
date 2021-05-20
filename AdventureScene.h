@@ -21,7 +21,7 @@ private:
 	class MessageWindow* mMessageWindow;
 	int mTextNumber;
 
-	class SelectMenu* sm;
+	class SelectSpriteComponent* sm;
 	bool mDoneVisu;
 
 	

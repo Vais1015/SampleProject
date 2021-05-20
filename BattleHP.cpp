@@ -24,7 +24,7 @@ void BattleHP::Draw(SDL_Renderer* renderer)
 
 	SDL_Rect r;
 	SDL_QueryTexture(texture, nullptr, nullptr, &r.w, &r.h);
-	r.x = static_cast<int>(mOwner->GetCentralPosition().x - (mTexWidth / 2.0f));
+	r.x = static_cast<int>(mOwner->GetCentralPosition().x - (mTexWidth / 1.7f));
 	r.y = static_cast<int>(mOwner->GetCentralPosition().y * 2.0f);
 
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);

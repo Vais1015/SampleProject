@@ -6,7 +6,7 @@
 #include "StoryFlag.h"
 #include "BGSpriteComponent.h"
 #include "StoryFlag.h"
-#include "SelectSpriteComponent.h"
+#include "SelectMenu.h"
 #include <sstream>
 #include <iostream>
 
@@ -175,6 +175,10 @@ void AdventureScene::SetObject()
 {
 	LoadText(mTextNumber);
 
+	Actor* temp = new Actor(mGame);
+	temp->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y + 100));
+
+
 	switch (mTextNumber)
 	{
 	case 0:
@@ -191,7 +195,7 @@ void AdventureScene::SetObject()
 		LoadActor(IMG_ENEMY1, Vector2((float)mGame->GetWindowWidth() / 5.0f, (float)mGame->GetWindowHeight() / 3.0f), 2.0f, -80.0f);
 		LoadBG(IMG_ADVENTURE_BG1);
 
-		sm = new SelectMenu(mGame);
+		sm = new SelectSpriteComponent(temp);
 		sm->SetTextures(IMG_KILLBRIGHT, IMG_KILL, IMG_NOTKILLBRIGHT, IMG_NOTKILL);
 		sm->SetMenuVisualization(false);
 		break;
@@ -199,7 +203,7 @@ void AdventureScene::SetObject()
 	case 3:
 		LoadBG(IMG_ADVENTURE_BG1);
 
-		sm = new SelectMenu(mGame);
+		sm = new SelectSpriteComponent(temp);
 		sm->SetTextures(IMG_REPEATBRIGHT, IMG_REPEAT, IMG_NOTREPEATBRIGHT, IMG_NOTREPEAT);
 		sm->SetMenuVisualization(false);
 		break;
@@ -208,7 +212,7 @@ void AdventureScene::SetObject()
 		LoadActor(IMG_ENEMY1, mDefaultPos, 2.0f);
 		LoadBG(IMG_ADVENTURE_BG1);
 
-		sm = new SelectMenu(mGame);
+		sm = new SelectSpriteComponent(temp);
 		sm->SetTextures(IMG_REPEATBRIGHT, IMG_REPEAT, IMG_NOTREPEATBRIGHT, IMG_NOTREPEAT);		sm->SetMenuVisualization(false);
 		sm->SetMenuVisualization(false);
 		break;

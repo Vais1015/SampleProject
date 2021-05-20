@@ -16,6 +16,9 @@ public:
 
     void LoadText(std::string text);
 
+    //  Getter
+    bool GetRemainingText() const;
+
 private:
     //  DisplayMessage‚Ìƒwƒ‹ƒp[ŠÖ”
     void SetTexture(SDL_Renderer* renderer,int i);

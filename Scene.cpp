@@ -3,7 +3,6 @@
 #include "Actor.h"
 #include "BGSpriteComponent.h"
 #include "Math.h"
-#include "SelectSpriteComponent.h"
 #include <iostream>
 
 Scene::Scene(Game* game, SceneManager* sceneManager)
@@ -41,17 +40,20 @@ void Scene::UpdateScene(float deltaTime)
 
 void Scene::SceneOutput(SDL_Renderer* renderer)
 {
-	SDL_Rect rectangle;
-	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	if (mAlpha > 0)
+	{
+		SDL_Rect rectangle;
+		SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
-	rectangle.x = 0;
-	rectangle.y = 0;
-	rectangle.w = mGame->GetWindowWidth();
-	rectangle.h = mGame->GetWindowHeight();
+		rectangle.x = 0;
+		rectangle.y = 0;
+		rectangle.w = mGame->GetWindowWidth();
+		rectangle.h = mGame->GetWindowHeight();
 
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, (Uint8)mAlpha);
-	SDL_RenderFillRect(renderer, &rectangle);
-	SDL_RenderPresent(renderer);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, (Uint8)mAlpha);
+		SDL_RenderFillRect(renderer, &rectangle);
+		SDL_RenderPresent(renderer);
+	}
 }
 
 //	Setter

@@ -1,11 +1,12 @@
-#include "BattleScene.h"
+#include "ImgPath.h"
 #include "Game.h"
 #include "SceneManager.h"
+#include "BattleScene.h"
+#include "Player.h"
+#include "Enemy.h"
 #include "BattleMessageWindow.h"
 #include "BGSpriteComponent.h"
-#include "Player.h"
-#include "ImgPath.h"
-#include "Enemy.h"
+#include "BattleMenuSpriteComponent.h"
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
@@ -21,6 +22,12 @@ BattleScene::BattleScene(Game* game,SceneManager* manager)
 	mPlayer = new Player(game, this);
 	mEnemy = new Enemy(game, this, IMG_ENEMY1);
 	mMessageWindow = new BattleMessageWindow(game, this);
+
+	Actor* temp = new Actor(game);
+	temp->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y - 50));
+	mBM = new BattleMenuSpriteComponent(temp,this);
+	mBM->SetTextures(IMG_STRIKEBRIGHT, IMG_STRIKE, IMG_SHOOTBRIGHT, IMG_SHOOT);
+	mBM->SetMenuVisualization(false);
 
 	LoadBG(IMG_BATTLE_BG1, -25.0f, IMG_BATTLE_BG2);
 	LoadBG(IMG_BATTLE_BG3, -50.0f, IMG_BATTLE_BG3);
@@ -55,7 +62,12 @@ void BattleScene::UpdateScene(float deltaTime)
 
 	if (mFinished)
 	{
-		mSceneManager->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
+		mBM->SetMenuVisualization(false);
+
+		if (!mMessageWindow->GetRemainingText())
+		{
+			mSceneManager->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
+		}
 	}
 }
 
@@ -105,6 +117,11 @@ class Enemy* BattleScene::GetEnemy() const
 class BattleMessageWindow* BattleScene::GetMessageWindow() const 
 {
 	return mMessageWindow; 
+}
+
+class BattleMenuSpriteComponent* BattleScene::GetSelectMenu() const
+{
+	return mBM;
 }
 
 TTF_Font* BattleScene::GetFont() const

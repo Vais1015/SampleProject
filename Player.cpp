@@ -1,3 +1,4 @@
+#include "ImgPath.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Game.h"
@@ -34,9 +35,6 @@ Player::Player(Game* game, BattleScene* battleScene)
 	mArts.push_back(Arts{ "GUN",1.0f,SHOOT });
 	mArts.push_back(Arts{ "LIGHT",1.0f,LIGHT });
 
-	//	BattleMenuの設定、位置は設定済み
-	mBM = new BattleMenuSpriteComponent(this, battleScene);
-
 	//	体力を表示するSpriteComponent
 	mCharacterHP = new BattleHP(this,battleScene);
 }
@@ -47,16 +45,9 @@ void Player::UpdateActor(float deltaTime)
 	if (mCondition == Condition::ALIVE)
 	{
 		BattleCharacter::UpdateActor(deltaTime);
-
-		if (mFromPreviousAttack == mCoolDown)
-		{
-			mBM->SetCanInput(true);
-		}
 	}
 	else if (mCondition == Condition::DEAD)
 	{
-		mBM->SetCanInput(false);
-
 		//	倒されたらSpriteを非表示にする
 		SDL_SetTextureAlphaMod(mCharacterImage->GetTexture(), 0);
 
@@ -68,26 +59,19 @@ void Player::ActorInput(const uint8_t* keyState)
 {
 	if (mFromPreviousAttack == mCoolDown && keyState[SDL_SCANCODE_SPACE])
 	{
-		switch (mBM->GetSpriteType())
+		if (mBattleScene->GetSelectMenu()->GetIsTop())
 		{
-		case BattleMenuSpriteComponent::SpriteType::STRIKE:
 			AttackEnemy(mBattleScene->GetEnemy(), mArts[0]);
-			break;
-
-		case BattleMenuSpriteComponent::SpriteType::SHOOT:
+		}
+		else
+		{
 			AttackEnemy(mBattleScene->GetEnemy(), mArts[1]);
-			break;
-				
-		default:
-			break;
 		}
 	}
 }
 
 void Player::AttackEnemy(class Enemy* target,Arts arts)
 {
-	mBM->SetCanInput(false);
-
 	int offensivePower = mStatus.OffensivePower;
 
 	int defensivePower = target->GetStatus().DefensivePower;
