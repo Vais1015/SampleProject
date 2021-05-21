@@ -27,7 +27,7 @@ private:
 class SelectSpriteComponent : public SpriteComponent
 {
 public:
-	SelectSpriteComponent(class SelectMenu* owner, int drawOrder = 200);
+	SelectSpriteComponent(class Actor* owner, int drawOrder = 200);
 
 	void ProcessInput(const uint8_t* keyState, SDL_Event* event) override;
 	virtual void Draw(SDL_Renderer* renderer) override;

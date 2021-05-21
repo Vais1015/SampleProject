@@ -29,7 +29,7 @@ void SelectMenu::SetMenuVisualization(bool visualization)
 	ssc->SetMenuVisualization(visualization);
 }
 
-SelectSpriteComponent::SelectSpriteComponent(class SelectMenu* owner, int drawOrder)
+SelectSpriteComponent::SelectSpriteComponent(class Actor* owner, int drawOrder)
 	:SpriteComponent(owner, SDL_FLIP_NONE, drawOrder)
 	, mCanInput(false)
 {

@@ -19,7 +19,7 @@ public:
 	class Player* GetPlayer() const;
 	class Enemy* GetEnemy() const;
 	class BattleMsgWindow* GetMessageWindow() const;
-	class BattleMenu* GetSelectMenu() const;
+	class BattleMenuSpriteComponent* GetSelectMenu() const;
 	TTF_Font* GetFont() const;
 	bool GetFinished() const;
 
@@ -32,7 +32,7 @@ private:
 	class Player* mPlayer;
 	class Enemy* mEnemy;
 	class BattleMsgWindow* mMessageWindow;
-	class BattleMenu* mBM;
+	class BattleMenuSpriteComponent* mBM;
 	class BGM* mBGM;
 
 	bool mFinished;

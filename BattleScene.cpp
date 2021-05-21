@@ -24,8 +24,9 @@ BattleScene::BattleScene(Game* game,SceneMgr* manager)
 	mEnemy = new Enemy(game, this, IMG_ENEMY1);
 	mMessageWindow = new BattleMsgWindow(game, this);
 
-	mBM = new BattleMenu(game,this);
-	mBM->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y - 50));
+	Actor* temp = new Actor(game);
+	temp->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y - 50));
+	mBM = new BattleMenuSpriteComponent(temp,this);
 	mBM->SetTextures(IMG_STRIKEBRIGHT, IMG_STRIKE, IMG_SHOOTBRIGHT, IMG_SHOOT);
 	mBM->SetMenuVisualization(false);
 
@@ -123,7 +124,7 @@ class BattleMsgWindow* BattleScene::GetMessageWindow() const
 	return mMessageWindow; 
 }
 
-class BattleMenu* BattleScene::GetSelectMenu() const
+class BattleMenuSpriteComponent* BattleScene::GetSelectMenu() const
 {
 	return mBM;
 }
