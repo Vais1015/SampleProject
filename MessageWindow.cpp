@@ -1,3 +1,4 @@
+#include "FilePath.h"
 #include "Game.h"
 #include "MessageWindow.h"
 #include "SpriteComponent.h"
@@ -17,7 +18,7 @@ MessageWindow::MessageWindow(Game* game)
         (float)game->GetWindowHeight() - ((float)game->GetWindowHeight() / 5.0f)));
 
     mWindowSC = new SpriteComponent(this);
-    mWindowSC->SetTexture(game->SetTexture(mWindowPath));
+    mWindowSC->SetTexture(game->SetTexture(IMG_WINDOW));
 }
 
 MessageWindow::~MessageWindow()

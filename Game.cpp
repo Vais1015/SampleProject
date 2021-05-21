@@ -1,9 +1,9 @@
+#include "FilePath.h"
 #include "Game.h"
 #include "SceneManager.h"
 #include "Actor.h"
 #include "StoryFlag.h"
 #include "SpriteComponent.h"
-#include "ImgPath.h"
 #include "SDL_image.h"
 #include <algorithm>
 #include <iostream>
@@ -23,27 +23,31 @@ Game::Game()
 bool Game::Initialize()
 {
 	//SDL‚ğ‰Šú‰»
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) 
+	{
 		SDL_Log("‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½F%s", SDL_GetError());
 		return false;
 	}
 
 	//	Window‚Ìì¬
 	mWindow = SDL_CreateWindow("Sample Program", 100, 50, mWindowWidth, mWindowHeight, 0);
-	if (!mWindow) {
+	if (!mWindow)
+	{
 		SDL_Log("Windows‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½F%s", SDL_GetError());
 		return false;
 	}
 
 	//	Renderer‚Ìì¬
 	mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (!mRenderer) {
+	if (!mRenderer) 
+	{
 		SDL_Log("Renderer‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½F%s", SDL_GetError());
 		return false;
 	}
 
 	//	IMG‚Ì‰Šú‰»
-	if (IMG_Init(IMG_INIT_PNG) == 0) {
+	if (IMG_Init(IMG_INIT_PNG) == 0)
+	{
 		SDL_Log("sdl_image‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½F%s", SDL_GetError());
 		return false;
 	}
@@ -82,9 +86,11 @@ void Game::Shutdown()
 	delete mStoryFlag;
 
 	UnloadData();
+
 	TTF_CloseFont(mFont);
 	TTF_Quit();
 	IMG_Quit();
+
 	SDL_DestroyRenderer(mRenderer);
 	SDL_DestroyWindow(mWindow);
 	SDL_Quit();

@@ -16,8 +16,6 @@ public:
 	void AttackEnemy(class Enemy* target,Arts arts);
 
 private:
-	std::string mPlayerImg = "Assets/Player.png";
-
 	Vector2 mPos;
 	float mScale = 2.0f;
 	int mDrawOrder = 120;

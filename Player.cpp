@@ -1,4 +1,4 @@
-#include "ImgPath.h"
+#include "FilePath.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Game.h"
@@ -22,7 +22,7 @@ Player::Player(Game* game, BattleScene* battleScene)
 	SetScale(mScale);
 
 	mCharacterImage = new SpriteComponent(this, SDL_FLIP_VERTICAL, mDrawOrder);
-	mCharacterImage->SetTexture(game->SetTexture(mPlayerImg));
+	mCharacterImage->SetTexture(game->SetTexture(IMG_PLAYER));
 
 	//	ステータスの設定
 	mStatus = { 2000,300,80,65,65, STRIKE | WINDOW | DARK , "You" };

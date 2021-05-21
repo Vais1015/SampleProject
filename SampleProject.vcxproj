@@ -96,7 +96,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\SDL2\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(SolutionDir)\SDL2\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /i /s /y</Command>
@@ -165,6 +165,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SelectMenu.cpp" />
+    <ClCompile Include="BGMComponent.cpp" />
     <ClCompile Include="StoryFlag.cpp" />
     <ClCompile Include="BattleHP.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
@@ -181,7 +182,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="ImgPath.h" />
+    <ClInclude Include="FilePath.h" />
     <ClInclude Include="LoadScene.h" />
     <ClInclude Include="MessageWindow.h" />
     <ClInclude Include="Math.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SelectMenu.h" />
+    <ClInclude Include="BGMComponent.h" />
     <ClInclude Include="StoryFlag.h" />
     <ClInclude Include="BattleHP.h" />
     <ClInclude Include="SpriteComponent.h" />

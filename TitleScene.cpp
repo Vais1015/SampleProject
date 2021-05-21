@@ -1,4 +1,4 @@
-#include "ImgPath.h"
+#include "FilePath.h"
 #include "Game.h"
 #include "SceneManager.h"
 #include "TitleScene.h"
@@ -7,6 +7,7 @@
 #include "StoryFlag.h"
 #include "SpriteComponent.h"
 #include "BGSpriteComponent.h"
+#include "BGMComponent.h"
 #include <iostream>
 
 //TitleScene
@@ -45,6 +46,10 @@ void TitleScene::LoadData()
 	mSM = new SelectSpriteComponent(temp);
 	mSM->SetTextures(IMG_START_BRIGHT, IMG_START, IMG_END_BRIGHT, IMG_END);
 	mSM->SetMenuVisualization(true);
+
+	//	BGM
+	mBGM = new BGMComponent(new Actor(mGame));
+	mBGM->StartBGM(BGM_TITLE);
 }
 
 void TitleScene::SceneInput(const uint8_t* keyState)
@@ -55,10 +60,12 @@ void TitleScene::SceneInput(const uint8_t* keyState)
 	{
 		if (mSM->GetIsTop())
 		{
+			mBGM->StopBGM();
 			mSceneManager->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
 		}
 		else
 		{
+			mBGM->StopBGM();
 			mGame->SetIsRunning(false);
 		}
 	}

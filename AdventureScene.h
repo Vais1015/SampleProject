@@ -24,6 +24,8 @@ private:
 	class SelectSpriteComponent* sm;
 	bool mDoneVisu;
 
+	class BGMComponent* mBGM;
+
 	
 	//	キャラクターの基本位置
 	Vector2 mDefaultPos = Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y - 100);

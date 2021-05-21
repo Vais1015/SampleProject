@@ -29,6 +29,4 @@ private:
     SDL_Color mTextColor = { 255,255,255,255 };
 
     float mInterval = 0.5f; //’PˆÊ•b
-
-    std::string mWindowPath = "Assets/MessageWindowAdventure.png";
 };

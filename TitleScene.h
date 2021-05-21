@@ -16,4 +16,5 @@ public:
 
 private:
 	class SelectSpriteComponent* mSM;
+	class BGMComponent* mBGM;
 };

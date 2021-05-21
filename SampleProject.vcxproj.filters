@@ -93,6 +93,9 @@
     <ClCompile Include="Math.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="BGMComponent.cpp">
+      <Filter>My</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleScene.h">
@@ -155,11 +158,14 @@
     <ClInclude Include="SelectMenu.h">
       <Filter>My</Filter>
     </ClInclude>
-    <ClInclude Include="ImgPath.h">
+    <ClInclude Include="FilePath.h">
       <Filter>My</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BGMComponent.h">
+      <Filter>My</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -31,6 +31,7 @@ private:
 	class Enemy* mEnemy;
 	class BattleMessageWindow* mMessageWindow;
 	class BattleMenuSpriteComponent* mBM;
+	class BGMComponent* mBGM;
 
 	bool mFinished;
 	TTF_Font* mFont;

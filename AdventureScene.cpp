@@ -1,4 +1,4 @@
-#include "ImgPath.h"
+#include "FilePath.h"
 #include "Game.h"
 #include "SceneManager.h"
 #include "AdventureScene.h"
@@ -7,6 +7,7 @@
 #include "BGSpriteComponent.h"
 #include "StoryFlag.h"
 #include "SelectMenu.h"
+#include "BGMComponent.h"
 #include <sstream>
 #include <iostream>
 
@@ -33,6 +34,9 @@ void AdventureScene::LoadData()
 
 	SetTextNumber();
 	SetObject();
+
+	mBGM = new BGMComponent(new Actor(mGame));
+	mBGM->StartBGM(BGM_ADVENTURE, 55);
 }
 
 
@@ -50,11 +54,13 @@ void AdventureScene::SceneInput(const uint8_t* keyState)
 		{
 			if (sm->GetIsTop())
 			{
+				mBGM->StopBGM();
 				mGame->GetStoryFlag()->SetKillFlag(true);
 				mGame->GetSceneManager()->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
 			}
 			else
 			{
+				mBGM->StopBGM();
 				mGame->GetStoryFlag()->SetKillFlag(false);
 				mGame->GetSceneManager()->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
 			}
@@ -69,12 +75,14 @@ void AdventureScene::SceneInput(const uint8_t* keyState)
 		{
 			if (sm->GetIsTop())
 			{
+				mBGM->StopBGM();
 				GetStoryFlag()->SetSelectedKillFlag(false);
 				GetStoryFlag()->SetReated();
 				mGame->GetSceneManager()->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
 			}
 			else
 			{
+				mBGM->StopBGM();
 				mGame->GetSceneManager()->ChangeSceneType(SceneManager::SceneType::TITLE);
 			}
 		}
@@ -192,6 +200,7 @@ void AdventureScene::SetObject()
 		break;
 
 	case 3:
+		LoadActor(IMG_PLAYER, mDefaultPos, 2.0f);
 		LoadBG(IMG_ADVENTURE_BG1);
 
 		sm = new SelectSpriteComponent(temp);
@@ -236,10 +245,12 @@ void AdventureScene::SetNextScene()
 		switch (mTextNumber)
 		{
 		case 0:
+			mBGM->StopBGM();
 			mSceneManager->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
 			break;
 
 		case 1:
+			mBGM->StopBGM();
 			mSceneManager->ChangeSceneType(SceneManager::SceneType::BATTLE);
 			break;
 
@@ -276,6 +287,7 @@ void AdventureScene::SetNextScene()
 			break;
 
 		case 5:
+			mBGM->StopBGM();
 			GetStoryFlag()->SetCleared();
 			GetStoryFlag()->ResetFlags();
 			mSceneManager->ChangeSceneType(SceneManager::SceneType::TITLE);

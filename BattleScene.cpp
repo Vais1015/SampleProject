@@ -1,4 +1,4 @@
-#include "ImgPath.h"
+#include "FilePath.h"
 #include "Game.h"
 #include "SceneManager.h"
 #include "BattleScene.h"
@@ -7,6 +7,7 @@
 #include "BattleMessageWindow.h"
 #include "BGSpriteComponent.h"
 #include "BattleMenuSpriteComponent.h"
+#include "BGMComponent.h"
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
@@ -38,6 +39,9 @@ BattleScene::BattleScene(Game* game,SceneManager* manager)
 	{
 		SDL_Log("font‚ÌŽæ“¾‚ÉŽ¸”s‚µ‚Ü‚µ‚½F%s", TTF_GetError());
 	}
+
+	mBGM = new BGMComponent(new Actor(game));
+	mBGM->StartBGM(BGM_BATTLE, 55);
 }
 
 BattleScene::~BattleScene()
@@ -66,6 +70,7 @@ void BattleScene::UpdateScene(float deltaTime)
 
 		if (!mMessageWindow->GetRemainingText())
 		{
+			mBGM->StopBGM();
 			mSceneManager->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
 		}
 	}
