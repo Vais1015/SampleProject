@@ -85,8 +85,8 @@ int BattleScene::DamageCalculation(BattleCharacter* attacker,BattleCharacter* de
 
 	float random = (float)(std::rand() % 5 + 1) / 3;
 
-	if (random < 0.7f)
-		random = 0.7f;
+	if (random < 0.9f)
+		random = 0.9f;
 
 	//	ƒ_ƒ[ƒWŒvŽZiUŒ‚—Í‚Ì2æ‚ð–hŒä—Í‚ÅŠ„‚èA—”‚Æ‹Z‚ÌˆÐ—Í‚ðæŽZ
 	double damage = (std::pow(attacker->GetStatus().OffensivePower, 2) / (double)defender->GetStatus().DefensivePower) 
@@ -95,9 +95,10 @@ int BattleScene::DamageCalculation(BattleCharacter* attacker,BattleCharacter* de
 	//	Žã“_‚É‚æ‚èæŽZ
 	if (arts.Attribute & defender->GetStatus().Weakness)
 	{
-		damage *= 1.2;
+		damage *= 1.5;
 
 		defender->SetHitWeakness(true);
+		defender->SetDisplayedHitWeakness(false);
 	}
 
 	return static_cast<int>(damage);
@@ -127,6 +128,11 @@ class BattleMenuSpriteComponent* BattleScene::GetSelectMenu() const
 TTF_Font* BattleScene::GetFont() const
 {
 	return mFont;
+}
+
+bool BattleScene::GetFinished() const
+{
+	return mFinished;
 }
 
 //	Setter

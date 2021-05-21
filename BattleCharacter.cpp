@@ -18,6 +18,7 @@ BattleCharacter::BattleCharacter(Game* game, BattleScene* battleScene)
 	, mFromPreviousAttack(0)
 	, mRTRecoverySpd(0)
 	, mHitWeakness(false)
+	,mDisplayedHitWeakness(false)
 {
 	std::cout << "Start BattleCharacter" << std::endl;
 }
@@ -29,20 +30,23 @@ BattleCharacter::~BattleCharacter()
 
 void BattleCharacter::UpdateActor(float deltaTime)
 {
-	//	前の攻撃からのリキャストタイムを計算
-	if (!mHitWeakness)
+	if (!mBattleScene->GetFinished())
 	{
-		mFromPreviousAttack += (deltaTime * mRTRecoverySpd);
-	}
-	else
-	{
-		mFromPreviousAttack += (deltaTime * mRTRecoverySpd * mSlowDown);
-	}
+		//	前の攻撃からのリキャストタイムを計算
+		if (!mHitWeakness)
+		{
+			mFromPreviousAttack += (deltaTime * mRTRecoverySpd);
+		}
+		else
+		{
+			mFromPreviousAttack += (deltaTime * mRTRecoverySpd * mSlowDown);
+		}
 
-	if (mFromPreviousAttack > mCoolDown)
-	{
+		if (mFromPreviousAttack > mCoolDown)
+		{
 
-		mFromPreviousAttack = mCoolDown;
+			mFromPreviousAttack = mCoolDown;
+		}
 	}
 }
 
@@ -52,10 +56,11 @@ void BattleCharacter::RecvDamage(int damage)
 	std::ostringstream oss;
 	std::string str;
 
-	if (mHitWeakness)
+	if (mHitWeakness && !mDisplayedHitWeakness)
 	{
 		str = "Hit Weakness !!";
 		mBattleScene->GetMessageWindow()->LoadText(str);
+		mDisplayedHitWeakness = true;
 	}
 
 	oss << damage;
@@ -98,3 +103,7 @@ void BattleCharacter::SetHitWeakness(bool hit)
 	mHitWeakness = hit;
 }
 
+void BattleCharacter::SetDisplayedHitWeakness(bool displayed)
+{
+	mDisplayedHitWeakness = displayed;
+}

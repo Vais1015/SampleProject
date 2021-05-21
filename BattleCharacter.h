@@ -40,6 +40,7 @@ public:
 
 	//	Setter
 	void SetHitWeakness(bool hit);
+	void SetDisplayedHitWeakness(bool displayed);
 	//	later
 	//friend class BattleScene;
 
@@ -60,6 +61,7 @@ protected:
 	//	弱点にヒットすると次の技を出すまでリカバリースピードが遅くなる
 	float mSlowDown = 0.7f;
 	bool mHitWeakness;
+	bool mDisplayedHitWeakness;
 
 	//	弱点　mWeakPointに代入して利用　ビット演算
 	const unsigned int STRIKE = (1 << 0);

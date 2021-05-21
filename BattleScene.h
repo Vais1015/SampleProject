@@ -21,6 +21,7 @@ public:
 	class BattleMessageWindow* GetMessageWindow() const;
 	class BattleMenuSpriteComponent* GetSelectMenu() const;
 	TTF_Font* GetFont() const;
+	bool GetFinished() const;
 
 	//	Setter
 	void SetFinished(bool finished);

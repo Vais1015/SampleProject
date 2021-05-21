@@ -53,7 +53,12 @@ void StoryFlag::SetKillFlag(bool kill)
 {
 	mKill = kill;
 
-	mSelectedKill = true;
+	SetSelectedKillFlag(true);
+}
+
+void StoryFlag::SetSelectedKillFlag(bool sellected)
+{
+	mSelectedKill = sellected;
 }
 
 void StoryFlag::SetReated()
@@ -64,4 +69,16 @@ void StoryFlag::SetReated()
 void StoryFlag::SetCleared()
 {
 	mCleared = true;
+}
+
+void StoryFlag::ResetFlags()
+{
+	for (auto i : mStoryFlag)
+	{
+		i = false;
+	}
+
+	SetKillFlag(false);
+	SetSelectedKillFlag(false);
+	mRepeated = false;
 }

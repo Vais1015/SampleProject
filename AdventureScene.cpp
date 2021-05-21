@@ -69,7 +69,8 @@ void AdventureScene::SceneInput(const uint8_t* keyState)
 		{
 			if (sm->GetIsTop())
 			{
-				mGame->GetStoryFlag()->SetReated();
+				GetStoryFlag()->SetSelectedKillFlag(false);
+				GetStoryFlag()->SetReated();
 				mGame->GetSceneManager()->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
 			}
 			else
@@ -121,21 +122,6 @@ void AdventureScene::SetTextNumber()
 		return;
 	}
 
-	if (GetStoryFlag()->GetReated())
-	{
-
-		if (GetStoryFlag()->GetKillFlag())
-		{
-			mTextNumber = 4;
-			return;
-		}
-		else
-		{
-			mTextNumber = 3;
-			return;
-		}
-	}
-
 
 	if (GetStoryFlag()->GetSelectedKillFlag())
 	{
@@ -149,6 +135,11 @@ void AdventureScene::SetTextNumber()
 			mTextNumber = 4;
 			return;
 		}
+	}
+	else if(GetStoryFlag()->GetReated())
+	{
+		mTextNumber = 2;
+		return;
 	}
 
 	bool setText = false;
@@ -285,7 +276,8 @@ void AdventureScene::SetNextScene()
 			break;
 
 		case 5:
-			mGame->GetStoryFlag()->SetCleared();
+			GetStoryFlag()->SetCleared();
+			GetStoryFlag()->ResetFlags();
 			mSceneManager->ChangeSceneType(SceneManager::SceneType::TITLE);
 			break;
 

@@ -18,38 +18,43 @@ BattleMenuSpriteComponent::BattleMenuSpriteComponent(Actor* owner,BattleScene* b
 
 void BattleMenuSpriteComponent::Draw(SDL_Renderer* renderer)
 {
-	float time = mBattleScene->GetPlayer()->GetCoolDown() - mBattleScene->GetPlayer()->GetFromPreviousAttack();
-		std::cout << time << std::endl;
+	if (!mBattleScene->GetFinished())
+	{
+		float time = mBattleScene->GetPlayer()->GetCoolDown() - mBattleScene->GetPlayer()->GetFromPreviousAttack();
+		//	攻撃できないとき、リキャストタイムを表示
+		if (time != 0)
+		{
+			SetMenuVisualization(false);
 
-	//	攻撃できないとき、リキャストタイムを表示
-	if (time != 0)
+			std::ostringstream oss;
+			oss << std::fixed << std::setprecision(2) << time;
+
+			SDL_Surface* surface = TTF_RenderUTF8_Blended(mBattleScene->GetFont(), oss.str().c_str(), SDL_Color{ 255,255,255,255 });
+			SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+			//	テクスチャの位置と大きさ
+			SDL_Rect r;
+
+			SDL_QueryTexture(texture, nullptr, nullptr, &r.w, &r.h);
+			r.x = static_cast<int>(mOwner->GetGame()->GetWindowCentralPos().x - (r.w / 2.0f));
+			r.y = static_cast<int>(mOwner->GetGame()->GetWindowCentralPos().y - 60);
+
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+			SDL_RenderCopy(renderer, texture, nullptr, &r);
+
+			SDL_FreeSurface(surface);
+			SDL_DestroyTexture(texture);
+		}
+		//	攻撃できるときは選択肢を表示
+		else
+		{
+			SetMenuVisualization(true);
+			SelectSpriteComponent::Draw(renderer);
+		}
+	}
+	else if (mBattleScene->GetFinished())
 	{
 		SetMenuVisualization(false);
-
-		std::ostringstream oss;
-		oss << std::fixed << std::setprecision(2) << time;
-
-		SDL_Surface* surface = TTF_RenderUTF8_Blended(mBattleScene->GetFont(), oss.str().c_str(), SDL_Color{ 255,255,255,255 });
-		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-
-		//	テクスチャの位置と大きさ
-		SDL_Rect r;
-
-		SDL_QueryTexture(texture, nullptr, nullptr, &r.w, &r.h);
-		r.x = static_cast<int>(mOwner->GetGame()->GetWindowCentralPos().x - (r.w / 2.0f));
-		r.y = static_cast<int>(mOwner->GetGame()->GetWindowCentralPos().y - 60);
-
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderCopy(renderer, texture, nullptr, &r);
-
-		SDL_FreeSurface(surface);
-		SDL_DestroyTexture(texture);
-	}
-	//	攻撃できるときは選択肢を表示
-	else
-	{
-		SetMenuVisualization(true);
-		SelectSpriteComponent::Draw(renderer);
 	}
 }
 

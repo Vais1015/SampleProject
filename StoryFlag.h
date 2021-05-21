@@ -18,8 +18,10 @@ public:
 	// Setter
 	void SetFlag(int number);
 	void SetKillFlag(bool kill);
+	void SetSelectedKillFlag(bool sellected);
 	void SetReated();
 	void SetCleared();
+	void ResetFlags();
 
 private:
 	std::vector<bool> mStoryFlag;
