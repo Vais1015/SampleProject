@@ -28,7 +28,7 @@ Enemy::Enemy(Game* game, BattleScene* battleScene, std::string enemyImg)
 	mCharacterImg->SetTexture(game->SetTexture(enemyImg));
 
 	//	ステータスの設定
-	mStatus = { 550,300,65,70,30,SHOOT | FIRE | LIGHT,true, "Azel" };
+	mStatus = { 850,300,65,70,30,SHOOT | FIRE | LIGHT,true, "Azel" };
 
 	//	リカバリースピードの計算、バフなどでバトル中に変更はしない
 	mRTRecoverySpd = (2.0f * (float)mStatus.Speed) / 100.0f;	//	1.1
