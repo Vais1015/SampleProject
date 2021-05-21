@@ -1,5 +1,6 @@
 #pragma once
 #include "Actor.h"
+#include "SE.h"
 #include <string>
 
 class BattleCharacter : public Actor
@@ -12,18 +13,16 @@ public:
 		int DefensivePower;
 		int Speed;
 		unsigned int Weakness;
+		bool Alive;
 		std::string Name;
 	};
 
-	enum class Condition {
-		ALIVE,
-		DEAD
-	};
-
-	struct Arts {
+	struct Arts
+	{
 		std::string ArtsName;
 		float Power;
 		const unsigned int Attribute;
+		SE se;
 	};
 
 	BattleCharacter(class Game* , class BattleScene*);
@@ -51,7 +50,6 @@ protected:
 	class BattleHP* mCharacterHP;
 
 	Status mStatus;
-	Condition mCondition;
 
 	//	‹Z‚ğo‚µ‚Ä‚©‚ç•ú‚Â‚Ü‚Å‚ÌŠÔE’PˆÊ•bESpeed50‚Ì‚Æ‚«‚T•b
 	float mCoolDown = 5.0f;

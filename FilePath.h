@@ -43,6 +43,12 @@
 #define IMG_SHOOTBRIGHT "Img/Button_ShootBright.png"
 
 #define BGM_BATTLE "Sounds/bgm_battle.mp3"
+#define SE_BATTLE_DOWN "Sounds/se_down.mp3"
+#define SE_BATTLE_SWORD "Sounds/se_sword.mp3"
+#define SE_BATTLE_PUNCH "Sounds/se_punch.mp3"
+#define SE_BATTLE_GUN "Sounds/se_gun.mp3"
+#define SE_BATTLE_WATER "Sounds/se_water.mp3"
+#define SE_BATTLE_DARK "Sounds/se_dark.mp3"
 
 //	Font
 #define FONT_HANAMIN "Texts/HanaMinA.ttf"

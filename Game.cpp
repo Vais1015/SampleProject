@@ -5,6 +5,7 @@
 #include "StoryFlag.h"
 #include "SpriteComponent.h"
 #include "SDL_image.h"
+#include "SDL_mixer.h"
 #include <algorithm>
 #include <iostream>
 
@@ -52,6 +53,12 @@ bool Game::Initialize()
 		return false;
 	}
 
+	//	Sound‚Ì‰Šú‰»
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024))
+	{
+		SDL_Log("Audio‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½:%s", SDL_GetError());
+	}
+
 	//	Font‚Ì‰Šú‰»
 	if (TTF_Init() != 0) {
 		SDL_Log("ttf‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½F%s", TTF_GetError());
@@ -89,6 +96,9 @@ void Game::Shutdown()
 
 	TTF_CloseFont(mFont);
 	TTF_Quit();
+
+	Mix_CloseAudio();
+
 	IMG_Quit();
 
 	SDL_DestroyRenderer(mRenderer);

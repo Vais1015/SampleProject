@@ -5,6 +5,7 @@
 #include "BattleScene.h"
 #include "SceneManager.h"
 #include "BattleMessageWindow.h"
+#include "SE.h"
 #include "SpriteComponent.h"
 #include "BattleHP.h"
 #include <iostream>
@@ -25,15 +26,14 @@ Player::Player(Game* game, BattleScene* battleScene)
 	mCharacterImage->SetTexture(game->SetTexture(IMG_PLAYER));
 
 	//	ステータスの設定
-	mStatus = { 2000,300,80,65,65, STRIKE | WINDOW | DARK , "You" };
+	mStatus = { 2000,300,80,65,65, STRIKE | WINDOW | DARK ,true, "You" };
 
 	//	リカバリースピードの計算、バフなどでバトル中に変更はしない
 	mRTRecoverySpd = (2.0f * (float)mStatus.Speed) / 100.0f;	//	1.3
 
 	//	使える技
-	mArts.push_back(Arts{ "STRIKE",1.0f,STRIKE });
-	mArts.push_back(Arts{ "GUN",1.0f,SHOOT });
-	mArts.push_back(Arts{ "LIGHT",1.0f,LIGHT });
+	mArts.push_back(Arts{ "STRIKE",1.0f,STRIKE,SE(SE_BATTLE_SWORD) });
+	mArts.push_back(Arts{ "GUN",1.0f,SHOOT,SE(SE_BATTLE_GUN) });
 
 	//	体力を表示するSpriteComponent
 	mCharacterHP = new BattleHP(this,battleScene);
@@ -42,11 +42,11 @@ Player::Player(Game* game, BattleScene* battleScene)
 void Player::UpdateActor(float deltaTime)
 {
 
-	if (mCondition == Condition::ALIVE)
+	if (mStatus.Alive)
 	{
 		BattleCharacter::UpdateActor(deltaTime);
 	}
-	else if (mCondition == Condition::DEAD)
+	else
 	{
 		//	倒されたらSpriteを非表示にする
 		SDL_SetTextureAlphaMod(mCharacterImage->GetTexture(), 0);
@@ -73,15 +73,15 @@ void Player::ActorInput(const uint8_t* keyState)
 void Player::AttackEnemy(class Enemy* target,Arts arts)
 {
 	int offensivePower = mStatus.OffensivePower;
-
 	int defensivePower = target->GetStatus().DefensivePower;
-
 	int damage = mBattleScene->DamageCalculation(this, target, arts);
 
 	//	攻撃したことをウィンドウに表示
 	std::string str;
 	str = mStatus.Name + " used " + arts.ArtsName + " to " + target->GetStatus().Name+" !!";
 	mBattleScene->GetMessageWindow()->LoadText(str);
+
+	arts.se.MakeSound();
 
 	target->RecvDamage(damage);
 

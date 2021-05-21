@@ -13,8 +13,7 @@ BattleCharacter::BattleCharacter(Game* game, BattleScene* battleScene)
 	,mBattleScene(battleScene)
 	, mCharacterImage(nullptr)
 	,mCharacterHP(nullptr)
-	, mStatus{ 0,0,0,0,0,0, "" }
-	, mCondition(Condition::ALIVE)
+	, mStatus{ 0,0,0,0,0,0,true, "" }
 	, mFromPreviousAttack(0)
 	, mRTRecoverySpd(0)
 	, mHitWeakness(false)
@@ -73,7 +72,7 @@ void BattleCharacter::RecvDamage(int damage)
 	if (mStatus.HP <= 0)
 	{
 		mStatus.HP = 0;
-		mCondition = Condition::DEAD;
+		mStatus.Alive = false;
 
 		//	BattleMessageWindowにPlayerが力尽きたテキストをロード
 		str = mStatus.Name + " exhausted.";

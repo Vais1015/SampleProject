@@ -164,6 +164,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SE.cpp" />
     <ClCompile Include="SelectMenu.cpp" />
     <ClCompile Include="BGMComponent.cpp" />
     <ClCompile Include="StoryFlag.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SE.h" />
     <ClInclude Include="SelectMenu.h" />
     <ClInclude Include="BGMComponent.h" />
     <ClInclude Include="StoryFlag.h" />

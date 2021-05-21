@@ -5,16 +5,12 @@ BGMComponent::BGMComponent(Actor* owner)
 	:Component(owner)
 	, mBGM(nullptr)
 {
-	//	Sound‚Ì‰Šú‰»
-	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024))
-	{
-		SDL_Log("Audio‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½:%s", SDL_GetError());
-	}
+
 }
 
 BGMComponent::~BGMComponent()
 {
-
+	Mix_FreeMusic(mBGM);
 }
 
 //	‚Ü‚¸‚ÍSetSound‚Åƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş
@@ -32,6 +28,4 @@ void BGMComponent::StartBGM(std::string bgm, int volume)
 void BGMComponent::StopBGM()
 {
 	(void)Mix_FadeOutMusic(500);
-	Mix_FreeMusic(mBGM);
-	Mix_CloseAudio();
 }

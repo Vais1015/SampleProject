@@ -96,6 +96,9 @@
     <ClCompile Include="BGMComponent.cpp">
       <Filter>My</Filter>
     </ClCompile>
+    <ClCompile Include="SE.cpp">
+      <Filter>My</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleScene.h">
@@ -165,6 +168,9 @@
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="BGMComponent.h">
+      <Filter>My</Filter>
+    </ClInclude>
+    <ClInclude Include="SE.h">
       <Filter>My</Filter>
     </ClInclude>
   </ItemGroup>
