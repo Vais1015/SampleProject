@@ -167,7 +167,7 @@ void AdventureScene::SetObject()
 
 	//	SelectMenu—p
 	mSM = new SelectMenu(mGame);
-	mSM->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y + 200));
+	mSM->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y + 150));
 
 	//	BGM
 	mBGM = new BGM(new Actor(mGame));

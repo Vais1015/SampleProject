@@ -42,7 +42,7 @@ void TitleScene::LoadData()
 
 	//	TitleMenu
 	mSM = new SelectMenu(mGame);
-	mSM->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y + 100));
+	mSM->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y + 150));
 	mSM->SetTextures(IMG_START_BRIGHT, IMG_START, IMG_END_BRIGHT, IMG_END);
 	mSM->SetMenuVisualization(true);
 
