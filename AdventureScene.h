@@ -4,10 +4,10 @@
 class AdventureScene :public Scene
 {
 public:
-	AdventureScene(class Game*, class SceneManager*);
+	AdventureScene(class Game*, class SceneMgr*);
 	~AdventureScene();
 
-	void SceneInput(const uint8_t* keyState) override;
+	void SceneInput(const uint8_t* keyState, SDL_Event* event) override;
 	void UpdateScene(float deltaTime) override;
 	void SceneOutput(SDL_Renderer* renderer) override;
 
@@ -18,13 +18,13 @@ public:
 	void SetFlag(int textNumber);
 
 private:
-	class MessageWindow* mMessageWindow;
+	class MsgWindow* mMessageWindow;
 	int mTextNumber;
 
-	class SelectSpriteComponent* sm;
+	class SelectMenu* mSM;
 	bool mDoneVisu;
 
-	class BGMComponent* mBGM;
+	class BGM* mBGM;
 
 	
 	//	キャラクターの基本位置

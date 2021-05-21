@@ -3,11 +3,12 @@
 #include "SDL_mixer.h"
 #include <string>
 
-class BGMComponent : public Component
+class BGM : public Component
 {
 public:
-	BGMComponent(class Actor*);
-	~BGMComponent();
+	//	適当なアクターに接続すること
+	BGM(class Actor*);
+	~BGM();
 
 	void StartBGM(std::string bgm, int volume = 70);
 	void StopBGM();

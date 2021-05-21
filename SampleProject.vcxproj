@@ -72,6 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir).\SDL2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir).\SDL2\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -159,14 +161,14 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="LoadScene.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MessageWindow.cpp" />
+    <ClCompile Include="MsgWindow.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="SE.cpp" />
     <ClCompile Include="SelectMenu.cpp" />
-    <ClCompile Include="BGMComponent.cpp" />
+    <ClCompile Include="BGM.cpp" />
     <ClCompile Include="StoryFlag.cpp" />
     <ClCompile Include="BattleHP.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
@@ -185,14 +187,14 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="FilePath.h" />
     <ClInclude Include="LoadScene.h" />
-    <ClInclude Include="MessageWindow.h" />
+    <ClInclude Include="MsgWindow.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneMgr.h" />
     <ClInclude Include="SE.h" />
     <ClInclude Include="SelectMenu.h" />
-    <ClInclude Include="BGMComponent.h" />
+    <ClInclude Include="BGM.h" />
     <ClInclude Include="StoryFlag.h" />
     <ClInclude Include="BattleHP.h" />
     <ClInclude Include="SpriteComponent.h" />

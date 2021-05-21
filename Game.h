@@ -32,7 +32,7 @@ public:
 	void GenerateOutput();
 
 	//	Getter
-	class SceneManager* GetSceneManager() const;
+	class SceneMgr* GetSceneManager() const;
 	class StoryFlag* GetStoryFlag() const;
 
 	int GetWindowWidth() const;
@@ -42,6 +42,7 @@ public:
 
 	Uint32 GetInputTime() const;
 	Uint32 GetTicksCount() const;
+	bool GetPressed() const;
 
 	std::vector<Actor*> GetActors() const;
 	std::vector<SpriteComponent*> GetSprites() const;
@@ -53,18 +54,12 @@ public:
 	void SetIsRunning(bool isRunning);
 	void SetUpdatingActors(bool updatingActors);
 	void SetInputTime();
-
-	//	Debug
-	void GetMemberSize() {
-		std::cout << std::endl;
-		std::cout << "mTextures : " << mTextures.size() << std::endl;
-		std::cout << "mSprites : " << mSprites.size() << std::endl;
-		std::cout << "mActors : " << mActors.size() << std::endl;
-		std::cout << std::endl;
-	}
+	void SetPressedFalse();
 
 private:
-	class SceneManager* mSceneManager;
+	bool mPressed;
+
+	class SceneMgr* mSceneManager;
 	class StoryFlag* mStoryFlag;
 
 	SDL_Window* mWindow;

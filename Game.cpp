@@ -1,6 +1,6 @@
 #include "FilePath.h"
 #include "Game.h"
-#include "SceneManager.h"
+#include "SceneMgr.h"
 #include "Actor.h"
 #include "StoryFlag.h"
 #include "SpriteComponent.h"
@@ -12,9 +12,13 @@
 Game::Game()
 	:mWindow(nullptr)
 	, mRenderer(nullptr)
-	, mTicksCount(0)
+	, mFont(nullptr)
 	, mIsRunning(true)
 	, mUpdatingActors(false)
+	, mDeltaTime(0)
+	, mTicksCount(0)
+	, mInputTime(0)
+	, mPressed(false)
 	, mSceneManager(nullptr)
 	, mStoryFlag(nullptr)
 {
@@ -110,7 +114,7 @@ void Game::LoadData()
 {
 	//	入れ替え厳禁（TitleSceneでStoryFlagを使用するため）
 	mStoryFlag = new StoryFlag();
-	mSceneManager = new SceneManager(this);
+	mSceneManager = new SceneMgr(this);
 }
 
 void Game::UnloadData()
@@ -126,18 +130,19 @@ void Game::UnloadData()
 
 	mTextures.clear();
 
-	GetMemberSize();
-
 	std::cout << ":::Unload Data" << std::endl;
 }
 
 void Game::ProcessInput()
 {
 	SDL_Event event;
-	//Windowのバツボタンで停止
+	
+
 	while (SDL_PollEvent(&event)) 
 	{
-		switch (event.type) {
+		switch (event.type)
+		{
+		//	Windowのバツボタンで停止
 		case SDL_QUIT:
 			mIsRunning = false;
 			break;
@@ -145,16 +150,15 @@ void Game::ProcessInput()
 	}
 
 	const Uint8* keyState = SDL_GetKeyboardState(NULL);
+	
 	if (keyState[SDL_SCANCODE_ESCAPE])
 	{
 		mIsRunning = false;
 	}
 
 	mUpdatingActors = true;
-
 	//Sceneごとにインプットを処理
-	mSceneManager->SceneInput(keyState);
-
+	mSceneManager->SceneInput(keyState, &event);
 	mUpdatingActors = false;
 }
 
@@ -282,7 +286,7 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 
 
 //	Getter
-class SceneManager* Game::GetSceneManager() const 
+class SceneMgr* Game::GetSceneManager() const 
 {
 	return mSceneManager; 
 }
@@ -302,20 +306,45 @@ int Game:: GetWindowHeight() const
 	return mWindowHeight; 
 }
 
-Vector2 Game::GetScreenSize() const { return Vector2((float)mWindowWidth, (float)mWindowHeight); }
-Vector2 Game::GetWindowCentralPos() const { return Vector2((float)mWindowWidth / 2.0f, (float)mWindowHeight / 2.0f); }
+Vector2 Game::GetScreenSize() const 
+{
+	return Vector2((float)mWindowWidth, (float)mWindowHeight); 
+}
 
-Uint32 Game::GetTicksCount() const { return mTicksCount; }
+Vector2 Game::GetWindowCentralPos() const 
+{
+	return Vector2((float)mWindowWidth / 2.0f, (float)mWindowHeight / 2.0f); 
+}
+
+Uint32 Game::GetTicksCount() const 
+{
+	return mTicksCount; 
+}
 
 Uint32 Game::GetInputTime() const
 {
 	return mInputTime;
 }
 
-std::vector<Actor*> Game::GetActors() const { return mActors; }
-std::vector<SpriteComponent*> Game::GetSprites() const { return mSprites; }
+bool Game::GetPressed() const
+{
+	return mPressed;
+}
 
-TTF_Font* Game::GetFont() const { return mFont; }
+std::vector<Actor*> Game::GetActors() const 
+{
+	return mActors; 
+}
+
+std::vector<SpriteComponent*> Game::GetSprites() const 
+{
+	return mSprites; 
+}
+
+TTF_Font* Game::GetFont() const 
+{
+	return mFont; 
+}
 
 
 //	Setter
@@ -370,3 +399,7 @@ void Game::SetInputTime()
 	mInputTime = SDL_GetTicks();
 }
 
+void Game::SetPressedFalse()
+{
+	mPressed = false;
+}

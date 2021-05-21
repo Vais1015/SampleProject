@@ -6,10 +6,10 @@
 #include <queue>
 #include <vector>
 
-class BattleMessageWindow : public Actor
+class BattleMsgWindow : public Actor
 {
 public:
-    BattleMessageWindow(class Game* game, class BattleScene* scene);
+    BattleMsgWindow(class Game* game, class BattleScene* scene);
 
     void UpdateActor(float deltaTime) override;
     void DisplayMessage(SDL_Renderer* renderer);

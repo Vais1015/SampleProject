@@ -27,6 +27,7 @@
 #define IMG_NOTREPEATBRIGHT "Img/Button_NotRepeatBright.png"
 
 #define BGM_ADVENTURE "Sounds/bgm_adventure.mp3"
+#define BGM_ADVENTURE2 "Sounds/bgm_adventure2.mp3"
 
 //	For BattleScene
 #define IMG_PLAYER "Img/Player.png"
@@ -43,7 +44,6 @@
 #define IMG_SHOOTBRIGHT "Img/Button_ShootBright.png"
 
 #define BGM_BATTLE "Sounds/bgm_battle.mp3"
-#define SE_BATTLE_DOWN "Sounds/se_down.mp3"
 #define SE_BATTLE_SWORD "Sounds/se_sword.mp3"
 #define SE_BATTLE_PUNCH "Sounds/se_punch.mp3"
 #define SE_BATTLE_GUN "Sounds/se_gun.mp3"

@@ -7,7 +7,8 @@
 class Actor
 {
 public:
-	enum class State {
+	enum class State 
+	{
 		ACTIVE,
 		PAUSED,
 		DEAD
@@ -21,8 +22,8 @@ public:
 	void UpdateComponents(float deltaTime);
 	virtual void UpdateActor(float deltaTime) {};
 
-	void ProcessInput(const uint8_t* keyState);
-	virtual void ActorInput(const uint8_t* keyState) {};
+	void ProcessInput(const uint8_t* keyState, SDL_Event* event);
+	virtual void ActorInput(const uint8_t* keyState, SDL_Event* event) {};
 
 	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);

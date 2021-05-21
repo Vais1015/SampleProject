@@ -54,17 +54,17 @@ void Actor::RemoveComponent(Component* component)
 	}
 }
 
-void Actor::ProcessInput(const uint8_t* keyState)
+void Actor::ProcessInput(const uint8_t* keyState, SDL_Event* event)
 {
 	if (mState == State::ACTIVE)
 	{
 		// First process input for components
 		for (auto comp : mComponents)
 		{
-			comp->ProcessInput(keyState);
+			comp->ProcessInput(keyState, event);
 		}
 
-		ActorInput(keyState);
+		ActorInput(keyState, event);
 	}
 }
 

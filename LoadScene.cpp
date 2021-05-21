@@ -2,7 +2,7 @@
 #include "LoadScene.h"
 #include <iostream>
 
-LoadScene::LoadScene(Game* game, SceneManager* manager)
+LoadScene::LoadScene(Game* game, SceneMgr* manager)
 	:Scene(game,manager)
 {
     std::cout << "Start LoadScene" << std::endl;
@@ -54,19 +54,19 @@ void LoadScene::SetScene()
 
     switch (mSceneManager->GetNextSceneType())
     {
-    case SceneManager::SceneType::TITLE:
+    case SceneMgr::SceneType::TITLE:
         mSceneManager->SetTitleScene();
         break;
 
-    case SceneManager::SceneType::ADVENTURE:
+    case SceneMgr::SceneType::ADVENTURE:
         mSceneManager->SetAdventureScene();
         break;
 
-    case SceneManager::SceneType::BATTLE:
+    case SceneMgr::SceneType::BATTLE:
         mSceneManager->SetBattleScene();
         break;
 
-    case SceneManager::SceneType::LOAD:
+    case SceneMgr::SceneType::LOAD:
         std::cout << "Load‰æ–Ê‚©‚çLoad‰æ–Ê‚Ö‘JˆÚ‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚Ü‚·" << std::endl;
         break;
 

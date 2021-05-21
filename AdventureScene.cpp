@@ -1,20 +1,19 @@
 #include "FilePath.h"
 #include "Game.h"
-#include "SceneManager.h"
+#include "StoryFlag.h"
+#include "SceneMgr.h"
 #include "AdventureScene.h"
-#include "MessageWindow.h"
-#include "StoryFlag.h"
+#include "MsgWindow.h"
 #include "BGSpriteComponent.h"
-#include "StoryFlag.h"
 #include "SelectMenu.h"
-#include "BGMComponent.h"
+#include "BGM.h"
 #include <sstream>
 #include <iostream>
 
-AdventureScene::AdventureScene(class Game* game, SceneManager* manager)
+AdventureScene::AdventureScene(class Game* game, SceneMgr* manager)
 	:Scene(game, manager)
 	, mTextNumber(0)
-	, sm(nullptr)
+	, mSM(nullptr)
 	, mDoneVisu(false)
 {
 	std::cout << "Start AdventureScene" << std::endl;
@@ -24,66 +23,58 @@ AdventureScene::AdventureScene(class Game* game, SceneManager* manager)
 
 AdventureScene::~AdventureScene()
 {
-	mGame->GetMemberSize();
 	std::cout << ":::Delete AdventureScene" << std::endl;
 }
 
 void AdventureScene::LoadData()
 {
-	mMessageWindow = new MessageWindow(mGame);
+	mMessageWindow = new MsgWindow(mGame);
 
 	SetTextNumber();
 	SetObject();
-
-	mBGM = new BGMComponent(new Actor(mGame));
-	mBGM->StartBGM(BGM_ADVENTURE, 55);
 }
 
 
-void AdventureScene::SceneInput(const uint8_t* keyState)
+void AdventureScene::SceneInput(const uint8_t* keyState, SDL_Event* event)
 {
-	Scene::SceneInput(keyState);
-
-	float interval = (SDL_GetTicks() - mGame->GetInputTime()) / 1000.0f;
+	Scene::SceneInput(keyState,event);
 
 	if (mTextNumber == 2)
 	{
-		if (interval > 0.5f
-			&& sm->GetCanInput()
-			&& keyState[SDL_SCANCODE_SPACE])
+		if (mSM->GetCanInput()
+			&& event->key.keysym.scancode == SDL_SCANCODE_SPACE)
 		{
-			if (sm->GetIsTop())
+			if (mSM->GetIsTop())
 			{
 				mBGM->StopBGM();
 				mGame->GetStoryFlag()->SetKillFlag(true);
-				mGame->GetSceneManager()->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
+				mGame->GetSceneManager()->ChangeSceneType(SceneMgr::SceneType::ADVENTURE);
 			}
 			else
 			{
 				mBGM->StopBGM();
 				mGame->GetStoryFlag()->SetKillFlag(false);
-				mGame->GetSceneManager()->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
+				mGame->GetSceneManager()->ChangeSceneType(SceneMgr::SceneType::ADVENTURE);
 			}
 		}
 	}
 
 	if (mTextNumber == 3 || mTextNumber == 4)
 	{
-		if (interval > 0.5f
-			&& sm->GetCanInput()
-			&& keyState[SDL_SCANCODE_SPACE])
+		if (mSM->GetCanInput()
+			&& event->key.keysym.scancode == SDL_SCANCODE_SPACE)
 		{
-			if (sm->GetIsTop())
+			if (mSM->GetIsTop())
 			{
 				mBGM->StopBGM();
 				GetStoryFlag()->SetSelectedKillFlag(false);
 				GetStoryFlag()->SetReated();
-				mGame->GetSceneManager()->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
+				mGame->GetSceneManager()->ChangeSceneType(SceneMgr::SceneType::ADVENTURE);
 			}
 			else
 			{
 				mBGM->StopBGM();
-				mGame->GetSceneManager()->ChangeSceneType(SceneManager::SceneType::TITLE);
+				mGame->GetSceneManager()->ChangeSceneType(SceneMgr::SceneType::TITLE);
 			}
 		}
 	}
@@ -157,7 +148,7 @@ void AdventureScene::SetTextNumber()
 		if (i >= GetStoryFlag()->GetSceneAmount())
 		{
 			std::cout << "Something wrong" << std::endl;
-			mSceneManager->ChangeSceneType(SceneManager::SceneType::TITLE);
+			mSceneManager->ChangeSceneType(SceneMgr::SceneType::TITLE);
 		}
 		else if (!GetStoryFlag()->GetFlag().at(i))
 		{
@@ -174,9 +165,20 @@ void AdventureScene::SetObject()
 {
 	LoadText(mTextNumber);
 
-	Actor* temp = new Actor(mGame);
-	temp->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y + 100));
+	//	SelectMenu—p
+	mSM = new SelectMenu(mGame);
+	mSM->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y + 200));
 
+	//	BGM
+	mBGM = new BGM(new Actor(mGame));
+	if (mTextNumber != 5)
+	{
+		mBGM->StartBGM(BGM_ADVENTURE, 45);
+	}
+	else
+	{
+		mBGM->StartBGM(BGM_ADVENTURE2, 45);
+	}
 
 	switch (mTextNumber)
 	{
@@ -194,27 +196,24 @@ void AdventureScene::SetObject()
 		LoadActor(IMG_ENEMY1, Vector2((float)mGame->GetWindowWidth() / 5.0f, (float)mGame->GetWindowHeight() / 3.0f), 2.0f, -80.0f);
 		LoadBG(IMG_ADVENTURE_BG1);
 
-		sm = new SelectSpriteComponent(temp);
-		sm->SetTextures(IMG_KILLBRIGHT, IMG_KILL, IMG_NOTKILLBRIGHT, IMG_NOTKILL);
-		sm->SetMenuVisualization(false);
+		mSM->SetTextures(IMG_KILLBRIGHT, IMG_KILL, IMG_NOTKILLBRIGHT, IMG_NOTKILL);
+		mSM->SetMenuVisualization(false);
 		break;
 
 	case 3:
-		LoadActor(IMG_PLAYER, mDefaultPos, 2.0f);
+		LoadActor(IMG_PLAYER, mDefaultPos, 2.0f, 0, SDL_FLIP_VERTICAL);
 		LoadBG(IMG_ADVENTURE_BG1);
 
-		sm = new SelectSpriteComponent(temp);
-		sm->SetTextures(IMG_REPEATBRIGHT, IMG_REPEAT, IMG_NOTREPEATBRIGHT, IMG_NOTREPEAT);
-		sm->SetMenuVisualization(false);
+		mSM->SetTextures(IMG_REPEATBRIGHT, IMG_REPEAT, IMG_NOTREPEATBRIGHT, IMG_NOTREPEAT);
+		mSM->SetMenuVisualization(false);
 		break;
 
 	case 4:
 		LoadActor(IMG_ENEMY1, mDefaultPos, 2.0f);
 		LoadBG(IMG_ADVENTURE_BG1);
 
-		sm = new SelectSpriteComponent(temp);
-		sm->SetTextures(IMG_REPEATBRIGHT, IMG_REPEAT, IMG_NOTREPEATBRIGHT, IMG_NOTREPEAT);		sm->SetMenuVisualization(false);
-		sm->SetMenuVisualization(false);
+		mSM->SetTextures(IMG_REPEATBRIGHT, IMG_REPEAT, IMG_NOTREPEATBRIGHT, IMG_NOTREPEAT);	
+		mSM->SetMenuVisualization(false);
 		break;
 
 	case 5:
@@ -246,18 +245,18 @@ void AdventureScene::SetNextScene()
 		{
 		case 0:
 			mBGM->StopBGM();
-			mSceneManager->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
+			mSceneManager->ChangeSceneType(SceneMgr::SceneType::ADVENTURE);
 			break;
 
 		case 1:
 			mBGM->StopBGM();
-			mSceneManager->ChangeSceneType(SceneManager::SceneType::BATTLE);
+			mSceneManager->ChangeSceneType(SceneMgr::SceneType::BATTLE);
 			break;
 
 		case 2:
 			if (!mDoneVisu) 
 			{
-				sm->SetMenuVisualization(true);
+				mSM->SetMenuVisualization(true);
 				mDoneVisu = true;
 			}
 			break;
@@ -265,24 +264,24 @@ void AdventureScene::SetNextScene()
 		case 3:
 			if (!mDoneVisu && !mGame->GetStoryFlag()->GetReated())
 			{
-				sm->SetMenuVisualization(true);
+				mSM->SetMenuVisualization(true);
 				mDoneVisu = true;
 			}
 			else if (mGame->GetStoryFlag()->GetFlag().at(4))
 			{
-				mSceneManager->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
+				mSceneManager->ChangeSceneType(SceneMgr::SceneType::ADVENTURE);
 			}
 			break;
 
 		case 4:
 			if (!mDoneVisu && !mGame->GetStoryFlag()->GetReated())
 			{
-				sm->SetMenuVisualization(true);
+				mSM->SetMenuVisualization(true);
 				mDoneVisu = true;
 			}
 			else if (mGame->GetStoryFlag()->GetFlag().at(3))
 			{
-				mSceneManager->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
+				mSceneManager->ChangeSceneType(SceneMgr::SceneType::ADVENTURE);
 			}
 			break;
 
@@ -290,7 +289,7 @@ void AdventureScene::SetNextScene()
 			mBGM->StopBGM();
 			GetStoryFlag()->SetCleared();
 			GetStoryFlag()->ResetFlags();
-			mSceneManager->ChangeSceneType(SceneManager::SceneType::TITLE);
+			mSceneManager->ChangeSceneType(SceneMgr::SceneType::TITLE);
 			break;
 
 		default:

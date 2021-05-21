@@ -8,10 +8,10 @@
 class Scene
 {
 public:
-	Scene(class Game*, class SceneManager*);
+	Scene(class Game*, class SceneMgr*);
 	virtual ~Scene();
 
-	virtual void SceneInput(const uint8_t* keyState);
+	virtual void SceneInput(const uint8_t* keyState, SDL_Event* event);
 	virtual void UpdateScene(float deltaTime);
 	virtual void SceneOutput(SDL_Renderer* renderer);
 
@@ -21,7 +21,7 @@ public:
 
 protected:
 	class Game* mGame;
-	class SceneManager* mSceneManager;
+	class SceneMgr* mSceneManager;
 
 	float mAlpha;
 };

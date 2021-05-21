@@ -5,7 +5,7 @@
 #include "Math.h"
 #include <iostream>
 
-Scene::Scene(Game* game, SceneManager* sceneManager)
+Scene::Scene(Game* game, SceneMgr* sceneManager)
 	:mGame(game)
 	,mSceneManager(sceneManager)
 	,mAlpha(255.0f)
@@ -18,11 +18,11 @@ Scene::~Scene()
 	std::cout << ":::Delete Scene" << std::endl << std::endl;
 }
 
-void Scene::SceneInput(const uint8_t* keyState)
+void Scene::SceneInput(const uint8_t* keyState, SDL_Event* event)
 {
 	for (auto actor : mGame->GetActors())
 	{
-		actor->ProcessInput(keyState);
+		actor->ProcessInput(keyState,event);
 	}
 }
 

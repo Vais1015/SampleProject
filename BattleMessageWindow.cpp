@@ -8,7 +8,7 @@
 #include <fstream>
 #include <assert.h>
 
-BattleMessageWindow::BattleMessageWindow(Game* game, BattleScene* scene)
+BattleMsgWindow::BattleMsgWindow(Game* game, BattleScene* scene)
     :Actor(game)
     ,mBattleScene(scene)
     ,mInterval(0)
@@ -16,13 +16,13 @@ BattleMessageWindow::BattleMessageWindow(Game* game, BattleScene* scene)
     SetCentralPosition(Vector2((float)game->GetWindowWidth() / 2.0f, (float)game->GetWindowHeight() - ((float)game->GetWindowHeight() / 5.0f)));
 }
 
-void BattleMessageWindow::UpdateActor(float deltaTime)
+void BattleMsgWindow::UpdateActor(float deltaTime)
 {
     mInterval += deltaTime;
 }
 
 //  テキストを表示
-void BattleMessageWindow::DisplayMessage(SDL_Renderer* renderer)
+void BattleMsgWindow::DisplayMessage(SDL_Renderer* renderer)
 {
     //  1.5秒表示したテキストを削除
     if (mInterval > 1.5f && !mTextTexture.empty())
@@ -71,12 +71,12 @@ void BattleMessageWindow::DisplayMessage(SDL_Renderer* renderer)
     }
 }
 
-void BattleMessageWindow::LoadText(std::string text)
+void BattleMsgWindow::LoadText(std::string text)
 {
     mBattleTexts.push(text);
 }
 
-void BattleMessageWindow::SetTexture(SDL_Renderer* renderer,int i)
+void BattleMsgWindow::SetTexture(SDL_Renderer* renderer,int i)
 {
     TextTexture temp;
 
@@ -99,7 +99,7 @@ void BattleMessageWindow::SetTexture(SDL_Renderer* renderer,int i)
 }
 
 //  Getter
-bool BattleMessageWindow::GetRemainingText() const
+bool BattleMsgWindow::GetRemainingText() const
 {
     if (!mBattleTexts.empty() && !mTextTexture.empty())
     {

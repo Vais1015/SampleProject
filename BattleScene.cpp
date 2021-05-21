@@ -1,19 +1,19 @@
 #include "FilePath.h"
 #include "Game.h"
-#include "SceneManager.h"
+#include "SceneMgr.h"
 #include "BattleScene.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "BattleMessageWindow.h"
 #include "BGSpriteComponent.h"
 #include "BattleMenuSpriteComponent.h"
-#include "BGMComponent.h"
+#include "BGM.h"
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
 
 
-BattleScene::BattleScene(Game* game,SceneManager* manager)
+BattleScene::BattleScene(Game* game,SceneMgr* manager)
 	:Scene(game,manager)
 	,mFinished(false)
 	,mFont(nullptr)
@@ -22,11 +22,10 @@ BattleScene::BattleScene(Game* game,SceneManager* manager)
 
 	mPlayer = new Player(game, this);
 	mEnemy = new Enemy(game, this, IMG_ENEMY1);
-	mMessageWindow = new BattleMessageWindow(game, this);
+	mMessageWindow = new BattleMsgWindow(game, this);
 
-	Actor* temp = new Actor(game);
-	temp->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y - 50));
-	mBM = new BattleMenuSpriteComponent(temp,this);
+	mBM = new BattleMenu(game,this);
+	mBM->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y - 50));
 	mBM->SetTextures(IMG_STRIKEBRIGHT, IMG_STRIKE, IMG_SHOOTBRIGHT, IMG_SHOOT);
 	mBM->SetMenuVisualization(false);
 
@@ -40,23 +39,22 @@ BattleScene::BattleScene(Game* game,SceneManager* manager)
 		SDL_Log("font‚ÌŽæ“¾‚ÉŽ¸”s‚µ‚Ü‚µ‚½F%s", TTF_GetError());
 	}
 
-	mBGM = new BGMComponent(new Actor(game));
-	mBGM->StartBGM(BGM_BATTLE, 55);
+	mBGM = new BGM(new Actor(game));
+	mBGM->StartBGM(BGM_BATTLE, 30);
 }
 
 BattleScene::~BattleScene()
 {
 	TTF_CloseFont(mFont);
 
-	mGame->GetMemberSize();
 	std::cout << ":::Delete BattleScene" << std::endl;
 }
 
-void BattleScene::SceneInput(const uint8_t* keyState)
+void BattleScene::SceneInput(const uint8_t* keyState, SDL_Event* event)
 {
 	if (!mFinished)
 	{
-		Scene::SceneInput(keyState);
+		Scene::SceneInput(keyState, event);
 	}
 }
 
@@ -71,7 +69,7 @@ void BattleScene::UpdateScene(float deltaTime)
 		if (!mMessageWindow->GetRemainingText())
 		{
 			mBGM->StopBGM();
-			mSceneManager->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
+			mSceneManager->ChangeSceneType(SceneMgr::SceneType::ADVENTURE);
 		}
 	}
 }
@@ -120,12 +118,12 @@ class Enemy* BattleScene::GetEnemy() const
 	return mEnemy; 
 }
 
-class BattleMessageWindow* BattleScene::GetMessageWindow() const 
+class BattleMsgWindow* BattleScene::GetMessageWindow() const 
 {
 	return mMessageWindow; 
 }
 
-class BattleMenuSpriteComponent* BattleScene::GetSelectMenu() const
+class BattleMenu* BattleScene::GetSelectMenu() const
 {
 	return mBM;
 }

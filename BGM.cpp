@@ -1,14 +1,14 @@
-#include "BGMComponent.h"
+#include "BGM.h"
 #include "Actor.h"
 
-BGMComponent::BGMComponent(Actor* owner)
+BGM::BGM(Actor* owner)
 	:Component(owner)
 	, mBGM(nullptr)
 {
 
 }
 
-BGMComponent::~BGMComponent()
+BGM::~BGM()
 {
 	Mix_FreeMusic(mBGM);
 }
@@ -16,16 +16,16 @@ BGMComponent::~BGMComponent()
 //	まずはSetSoundでファイルを読み込む
 //	Volumeは0--128の間
 //	無限ループで再生
-void BGMComponent::StartBGM(std::string bgm, int volume)
+void BGM::StartBGM(std::string bgm, int volume)
 {
 	mBGM = Mix_LoadMUS(bgm.c_str());
 	
 	(void)Mix_VolumeMusic(volume);
 
-	Mix_FadeInMusic(mBGM, -1, 500);
+	Mix_FadeInMusic(mBGM, -1, 1000);
 }
 
-void BGMComponent::StopBGM()
+void BGM::StopBGM()
 {
 	(void)Mix_FadeOutMusic(500);
 }

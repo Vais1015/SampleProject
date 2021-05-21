@@ -17,8 +17,6 @@
 Enemy::Enemy(Game* game, BattleScene* battleScene, std::string enemyImg)
 	:BattleCharacter(game, battleScene)
 {
-	std::cout << "Start Enemy" << std::endl;
-
 	//	キャラの設定、左側に画像を反転せずに設置
 	mPos = Vector2((float)(float)game->GetWindowWidth() / 5.0f,
 		(float)game->GetWindowHeight() / 3.0f);
@@ -26,8 +24,8 @@ Enemy::Enemy(Game* game, BattleScene* battleScene, std::string enemyImg)
 	this->SetCentralPosition(mPos);
 	this->SetScale(mScale);
 
-	mCharacterImage = new SpriteComponent(this, SDL_FLIP_NONE, mDrawOrder);
-	mCharacterImage->SetTexture(game->SetTexture(enemyImg));
+	mCharacterImg = new SpriteComponent(this, SDL_FLIP_NONE, mDrawOrder);
+	mCharacterImg->SetTexture(game->SetTexture(enemyImg));
 
 	//	ステータスの設定
 	mStatus = { 550,300,65,70,30,SHOOT | FIRE | LIGHT,true, "Azel" };
@@ -36,9 +34,9 @@ Enemy::Enemy(Game* game, BattleScene* battleScene, std::string enemyImg)
 	mRTRecoverySpd = (2.0f * (float)mStatus.Speed) / 100.0f;	//	1.1
 
 	//	使える技
-	mArts.push_back(Arts{ "STRIKE",1.0f,STRIKE,SE(SE_BATTLE_PUNCH) });
-	mArts.push_back(Arts{ "WATER",1.0f,WATER,SE(SE_BATTLE_WATER) });
-	mArts.push_back(Arts{ "DARK",2.0f,DARK,SE(SE_BATTLE_DARK) });
+	mArts.push_back(Arts{ "STRIKE",1.0f,STRIKE,new SE(SE_BATTLE_PUNCH) });
+	mArts.push_back(Arts{ "WATER",1.0f,WATER,new SE(SE_BATTLE_WATER) });
+	mArts.push_back(Arts{ "DARK",2.0f,DARK,new SE(SE_BATTLE_DARK) });
 
 	//	体力表示
 	mCharacterHP = new BattleHP(this, battleScene);
@@ -46,7 +44,7 @@ Enemy::Enemy(Game* game, BattleScene* battleScene, std::string enemyImg)
 
 Enemy::~Enemy()
 {
-	std::cout << ":::Delete Enemy" << std::endl;
+
 }
 
 void Enemy::UpdateActor(float deltaTime)
@@ -55,7 +53,7 @@ void Enemy::UpdateActor(float deltaTime)
 	{
 		BattleCharacter::UpdateActor(deltaTime);
 
-		if (mFromPreviousAttack == mCoolDown)
+		if (mFromAttack == mCoolDown)
 		{
 			AttackPlayer(mBattleScene->GetPlayer());
 		}
@@ -64,7 +62,7 @@ void Enemy::UpdateActor(float deltaTime)
 	else
 	{
 		//	倒されたらSpriteを非表示にする
-		SDL_SetTextureAlphaMod(mCharacterImage->GetTexture(), 0);
+		SDL_SetTextureAlphaMod(mCharacterImg->GetTexture(), 0);
 
 		mBattleScene->SetFinished(true);
 	}
@@ -83,12 +81,12 @@ void Enemy::AttackPlayer(Player* target)
 	str = mStatus.Name + " used " + arts.ArtsName + " to " + target->GetStatus().Name + " !!";
 	mBattleScene->GetMessageWindow()->LoadText(str);
 
-	arts.se.MakeSound();
+	arts.se->MakeSound();
 
 	target->RecvDamage(damage);
 
 	mHitWeakness = false;
-	mFromPreviousAttack = 0;
+	mFromAttack = 0;
 }
 
 //	ランダムで攻撃

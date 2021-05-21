@@ -4,15 +4,15 @@
 #include "SDL_ttf.h"
 #include <string>
 
-class MessageWindow :public Actor
+class MsgWindow :public Actor
 {
 public:
-    MessageWindow(class Game*);
-    ~MessageWindow();
+    MsgWindow(class Game*);
+    ~MsgWindow();
 
     void LoadText(std::string textFile);
     void DisplayMessageWindow(SDL_Renderer*);
-    void ActorInput(const uint8_t* keyState) override;
+    void ActorInput(const uint8_t* keyState, SDL_Event* event) override;
 
     //  Getter;
     bool GetOccupied() const;

@@ -3,7 +3,7 @@
 #include "Scene.h"
 #include <memory>
 
-class SceneManager
+class SceneMgr
 {
 public:
 	enum class SceneType
@@ -14,10 +14,10 @@ public:
 		LOAD
 	};
 
-	SceneManager(class Game*);
-	~SceneManager();
+	SceneMgr(class Game*);
+	~SceneMgr();
 
-	void SceneInput(const uint8_t* keyState);
+	void SceneInput(const uint8_t* keyState, SDL_Event* event);
 	void UpdateScene(float deltaTime);
 	void SceneOutput(SDL_Renderer* renderer);
 	

@@ -1,42 +1,42 @@
 #include "Game.h"
-#include "SceneManager.h"
+#include "SceneMgr.h"
 #include "TitleScene.h"
 #include "AdventureScene.h"
 #include "BattleScene.h"
 #include "LoadScene.h"
 #include  <iostream>
 
-SceneManager::SceneManager(Game* game)
+SceneMgr::SceneMgr(Game* game)
     :mGame(game)
     , mCurrSceneType(SceneType::TITLE)
     , mNextSceneType(SceneType::LOAD)
 {
-    std::cout << "Start SceneManager" << std::endl;
+    std::cout << "Start SceneMgr" << std::endl;
 
     mScenes.emplace_back(std::make_unique<TitleScene>(game,this));
 }
 
-SceneManager::~SceneManager()
+SceneMgr::~SceneMgr()
 {
-    std::cout << ":::Delete SceneManager" << std::endl;
+    std::cout << ":::Delete SceneMgr" << std::endl;
 }
 
-void SceneManager::SceneInput(const uint8_t* keyState) 
+void SceneMgr::SceneInput(const uint8_t* keyState, SDL_Event* event) 
 {
-    mScenes.front()->SceneInput(keyState); 
+    mScenes.front()->SceneInput(keyState, event); 
 }
 
-void SceneManager::UpdateScene(float deltaTime) 
+void SceneMgr::UpdateScene(float deltaTime) 
 {
     mScenes.front()->UpdateScene(deltaTime); 
 }
 
-void SceneManager::SceneOutput(SDL_Renderer* renderer)
+void SceneMgr::SceneOutput(SDL_Renderer* renderer)
 {
     mScenes.front()->SceneOutput(renderer); 
 }
 
-void SceneManager::ChangeSceneType(SceneType nextSceneType)
+void SceneMgr::ChangeSceneType(SceneType nextSceneType)
 {
     if (nextSceneType == SceneType::LOAD)
     {
@@ -52,24 +52,24 @@ void SceneManager::ChangeSceneType(SceneType nextSceneType)
     mNextSceneType = nextSceneType;
 }
 
-void SceneManager::DeleteOldScene()
+void SceneMgr::DeleteOldScene()
 {
     mScenes.pop_back();
 }
 
 //	Getter
-SceneManager::SceneType SceneManager::GetCurrSceneType() const 
+SceneMgr::SceneType SceneMgr::GetCurrSceneType() const 
 {
     return mCurrSceneType; 
 }
 
-SceneManager::SceneType SceneManager::GetNextSceneType() const 
+SceneMgr::SceneType SceneMgr::GetNextSceneType() const 
 {
     return mNextSceneType; 
 }
 
 //  Setter
-void SceneManager::SetTitleScene()
+void SceneMgr::SetTitleScene()
 {
     DeleteOldScene();
     mScenes.insert(mScenes.begin(),std::make_unique<TitleScene>(mGame,this));
@@ -77,7 +77,7 @@ void SceneManager::SetTitleScene()
     SetNextSceneType(SceneType::LOAD);
 }
 
-void SceneManager::SetAdventureScene() 
+void SceneMgr::SetAdventureScene() 
 {
     DeleteOldScene();
     mScenes.insert(mScenes.begin(),std::make_unique<AdventureScene>(mGame,this));
@@ -85,7 +85,7 @@ void SceneManager::SetAdventureScene()
     SetNextSceneType(SceneType::LOAD);
 }
 
-void SceneManager::SetBattleScene()
+void SceneMgr::SetBattleScene()
 {
     DeleteOldScene();
     mScenes.insert(mScenes.begin(), std::make_unique<BattleScene>(mGame, this));
@@ -93,12 +93,12 @@ void SceneManager::SetBattleScene()
     SetNextSceneType(SceneType::LOAD);
 }
 
-void SceneManager::SetCurrSceneType(SceneType st)
+void SceneMgr::SetCurrSceneType(SceneType st)
 {
     mCurrSceneType = st;
 }
 
-void SceneManager::SetNextSceneType(SceneType st) 
+void SceneMgr::SetNextSceneType(SceneType st) 
 {
     mNextSceneType = st;
 }

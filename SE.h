@@ -6,7 +6,7 @@
 class SE
 {
 public:
-	SE(std::string se,int volume = 70);
+	SE(std::string se,int volume = 120);
 	~SE();
 
 	void MakeSound();

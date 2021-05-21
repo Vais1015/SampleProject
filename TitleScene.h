@@ -5,16 +5,16 @@
 class TitleScene : public Scene
 {
 public:
-	TitleScene(class Game*, class SceneManager*);
+	TitleScene(class Game*, class SceneMgr*);
 	~TitleScene();
 
 	void LoadData();
 
-	void SceneInput(const uint8_t* keyState) override;
+	void SceneInput(const uint8_t* keyState,SDL_Event* event) override;
 	void UpdateScene(float deltaTime) override;
 	void SceneOutput(SDL_Renderer* renderer) override;
 
 private:
-	class SelectSpriteComponent* mSM;
-	class BGMComponent* mBGM;
+	class SelectMenu* mSM;
+	class BGM* mBGM;
 };

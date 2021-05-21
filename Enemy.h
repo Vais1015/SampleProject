@@ -16,10 +16,4 @@ public:
 private:
 	//	AttackPlayer()‚Ìƒwƒ‹ƒp[
 	Arts SelectAttack();
-
-	std::vector<Arts> mArts;
-
-	Vector2 mPos;
-	float mScale = 2.0f;
-	int mDrawOrder = 120;
 };

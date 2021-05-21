@@ -9,7 +9,13 @@
 #include <sstream>
 #include <iomanip>
 
-BattleMenuSpriteComponent::BattleMenuSpriteComponent(Actor* owner,BattleScene* battle)
+BattleMenu::BattleMenu(Game* game, BattleScene* scene)
+	:SelectMenu(game)
+{
+	mBMSC = new BattleMenuSpriteComponent(this, scene);
+}
+
+BattleMenuSpriteComponent::BattleMenuSpriteComponent(SelectMenu* owner,BattleScene* battle)
 	:SelectSpriteComponent(owner)
 	,mBattleScene(battle)
 {

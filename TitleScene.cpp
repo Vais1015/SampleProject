@@ -1,17 +1,17 @@
 #include "FilePath.h"
 #include "Game.h"
-#include "SceneManager.h"
+#include "SceneMgr.h"
 #include "TitleScene.h"
 #include "SelectMenu.h"
 #include "Actor.h"
 #include "StoryFlag.h"
 #include "SpriteComponent.h"
 #include "BGSpriteComponent.h"
-#include "BGMComponent.h"
+#include "BGM.h"
 #include <iostream>
 
 //TitleScene
-TitleScene::TitleScene(Game* game, class SceneManager* manager)
+TitleScene::TitleScene(Game* game, class SceneMgr* manager)
 	:Scene(game, manager)
 {
 	std::cout << "Start TitleScene" << std::endl;
@@ -41,27 +41,26 @@ void TitleScene::LoadData()
 	}
 
 	//	TitleMenu
-	Actor* temp = new Actor(mGame);
-	temp->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y + 100));
-	mSM = new SelectSpriteComponent(temp);
+	mSM = new SelectMenu(mGame);
+	mSM->SetCentralPosition(Vector2(mGame->GetWindowCentralPos().x, mGame->GetWindowCentralPos().y + 100));
 	mSM->SetTextures(IMG_START_BRIGHT, IMG_START, IMG_END_BRIGHT, IMG_END);
 	mSM->SetMenuVisualization(true);
 
 	//	BGM
-	mBGM = new BGMComponent(new Actor(mGame));
+	mBGM = new BGM(new Actor(mGame));
 	mBGM->StartBGM(BGM_TITLE);
 }
 
-void TitleScene::SceneInput(const uint8_t* keyState)
+void TitleScene::SceneInput(const uint8_t* keyState,SDL_Event* event)
 {
-	Scene::SceneInput(keyState);
+	Scene::SceneInput(keyState,event);
 
 	if (keyState[SDL_SCANCODE_SPACE])
 	{
 		if (mSM->GetIsTop())
 		{
 			mBGM->StopBGM();
-			mSceneManager->ChangeSceneType(SceneManager::SceneType::ADVENTURE);
+			mSceneManager->ChangeSceneType(SceneMgr::SceneType::ADVENTURE);
 		}
 		else
 		{

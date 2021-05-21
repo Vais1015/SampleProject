@@ -6,10 +6,10 @@
 class BattleScene :public Scene
 {
 public:
-	BattleScene(class Game*, class SceneManager*);
+	BattleScene(class Game*, class SceneMgr*);
 	~BattleScene();
 
-	void SceneInput(const uint8_t* keyState) override;
+	void SceneInput(const uint8_t* keyState, SDL_Event* event) override;
 	void UpdateScene(float deltaTime) override;
 	void SceneOutput(SDL_Renderer* renderer) override;
 
@@ -18,20 +18,22 @@ public:
 	//	Getter
 	class Player* GetPlayer() const;
 	class Enemy* GetEnemy() const;
-	class BattleMessageWindow* GetMessageWindow() const;
-	class BattleMenuSpriteComponent* GetSelectMenu() const;
+	class BattleMsgWindow* GetMessageWindow() const;
+	class BattleMenu* GetSelectMenu() const;
 	TTF_Font* GetFont() const;
 	bool GetFinished() const;
 
 	//	Setter
 	void SetFinished(bool finished);
 
+
+
 private:
 	class Player* mPlayer;
 	class Enemy* mEnemy;
-	class BattleMessageWindow* mMessageWindow;
-	class BattleMenuSpriteComponent* mBM;
-	class BGMComponent* mBGM;
+	class BattleMsgWindow* mMessageWindow;
+	class BattleMenu* mBM;
+	class BGM* mBGM;
 
 	bool mFinished;
 	TTF_Font* mFont;

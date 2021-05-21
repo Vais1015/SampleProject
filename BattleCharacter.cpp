@@ -4,6 +4,8 @@
 #include "Math.h"
 #include "SDL.h"
 #include "BattleMessageWindow.h"
+#include "SE.h"
+#include "FilePath.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -11,20 +13,23 @@
 BattleCharacter::BattleCharacter(Game* game, BattleScene* battleScene)
 	:Actor(game)
 	,mBattleScene(battleScene)
-	, mCharacterImage(nullptr)
+	, mCharacterImg(nullptr)
 	,mCharacterHP(nullptr)
 	, mStatus{ 0,0,0,0,0,0,true, "" }
-	, mFromPreviousAttack(0)
+	, mFromAttack(0)
 	, mRTRecoverySpd(0)
 	, mHitWeakness(false)
-	,mDisplayedHitWeakness(false)
+	,mDisplayedHitWeaknessMsg(false)
 {
-	std::cout << "Start BattleCharacter" << std::endl;
+
 }
 
 BattleCharacter::~BattleCharacter()
 {
-	std::cout << ":::Delete BattleCharacter" << std::endl;
+	for (auto i : mArts)
+	{
+		delete i.se;
+	}
 }
 
 void BattleCharacter::UpdateActor(float deltaTime)
@@ -34,17 +39,17 @@ void BattleCharacter::UpdateActor(float deltaTime)
 		//	前の攻撃からのリキャストタイムを計算
 		if (!mHitWeakness)
 		{
-			mFromPreviousAttack += (deltaTime * mRTRecoverySpd);
+			mFromAttack += (deltaTime * mRTRecoverySpd);
 		}
 		else
 		{
-			mFromPreviousAttack += (deltaTime * mRTRecoverySpd * mSlowDown);
+			mFromAttack += (deltaTime * mRTRecoverySpd * mSlowDown);
 		}
 
-		if (mFromPreviousAttack > mCoolDown)
+		if (mFromAttack > mCoolDown)
 		{
 
-			mFromPreviousAttack = mCoolDown;
+			mFromAttack = mCoolDown;
 		}
 	}
 }
@@ -55,11 +60,11 @@ void BattleCharacter::RecvDamage(int damage)
 	std::ostringstream oss;
 	std::string str;
 
-	if (mHitWeakness && !mDisplayedHitWeakness)
+	if (mHitWeakness && !mDisplayedHitWeaknessMsg)
 	{
 		str = "Hit Weakness !!";
 		mBattleScene->GetMessageWindow()->LoadText(str);
-		mDisplayedHitWeakness = true;
+		mDisplayedHitWeaknessMsg = true;
 	}
 
 	oss << damage;
@@ -93,7 +98,7 @@ float BattleCharacter::GetCoolDown() const
 
 float BattleCharacter::GetFromPreviousAttack() const
 {
-	return mFromPreviousAttack;
+	return mFromAttack;
 }
 
 //	Setter
@@ -104,5 +109,5 @@ void BattleCharacter::SetHitWeakness(bool hit)
 
 void BattleCharacter::SetDisplayedHitWeakness(bool displayed)
 {
-	mDisplayedHitWeakness = displayed;
+	mDisplayedHitWeaknessMsg = displayed;
 }

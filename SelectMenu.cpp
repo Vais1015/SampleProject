@@ -3,7 +3,33 @@
 #include "SelectMenu.h"
 #include <iostream>
 
-SelectSpriteComponent::SelectSpriteComponent(class Actor* owner, int drawOrder)
+SelectMenu::SelectMenu(Game* game)
+	:Actor(game)
+{
+	ssc = new SelectSpriteComponent(this);
+}
+
+bool SelectMenu::GetCanInput() const
+{
+	return ssc->GetCanInput();
+}
+
+bool SelectMenu::GetIsTop() const
+{
+	return ssc->GetIsTop();
+}
+
+void SelectMenu::SetTextures(std::string tb, std::string t, std::string bb, std::string b)
+{
+	ssc->SetTextures(tb, t, bb, b);
+}
+
+void SelectMenu::SetMenuVisualization(bool visualization)
+{
+	ssc->SetMenuVisualization(visualization);
+}
+
+SelectSpriteComponent::SelectSpriteComponent(class SelectMenu* owner, int drawOrder)
 	:SpriteComponent(owner, SDL_FLIP_NONE, drawOrder)
 	, mCanInput(false)
 {
@@ -11,7 +37,7 @@ SelectSpriteComponent::SelectSpriteComponent(class Actor* owner, int drawOrder)
 }
 
 //	S,Wで選択肢を移動
-void SelectSpriteComponent::ProcessInput(const uint8_t* keyState)
+void SelectSpriteComponent::ProcessInput(const uint8_t* keyState,SDL_Event* event)
 {
 	float interval = (SDL_GetTicks() - mOwner->GetGame()->GetInputTime()) / 1000.0f;
 
@@ -58,28 +84,16 @@ void SelectSpriteComponent::ProcessInput(const uint8_t* keyState)
 //	セレクトされているかを判定した後、適切な画像を表示
 void SelectSpriteComponent::Draw(SDL_Renderer* renderer)
 {
-	int i = 0;
-
 	for (auto& st : mSelectMenuTextures)
 	{
-		SDL_Rect r;
-		int iw, ih;
-		SDL_QueryTexture(st.notSelTex, nullptr, nullptr, &iw, &ih);
-		r.w = static_cast<int>(iw);
-		r.h = static_cast<int>(ih);
-		r.x = static_cast<int>(mOwner->GetCentralPosition().x - r.w / 2);
-		r.y = static_cast<int>(mOwner->GetCentralPosition().y - r.h / 2 - 30 + (100 * i));
-
 		if (st.isSelecting)
 		{
-			SDL_RenderCopy(renderer, st.nowSelTex, nullptr, &r);
+			SDL_RenderCopy(renderer, st.nowSelTex, nullptr, &st.r);
 		}
 		else if (!st.isSelecting)
 		{
-			SDL_RenderCopy(renderer, st.notSelTex, nullptr, &r);
+			SDL_RenderCopy(renderer, st.notSelTex, nullptr, &st.r);
 		}
-
-		++i;
 	}
 }
 
@@ -91,7 +105,7 @@ bool SelectSpriteComponent::GetCanInput() const
 
 bool SelectSpriteComponent::GetIsTop() const
 {
-	return mNowTexItr->isTop; 
+	return mNowTexItr->isTop;
 }
 
 //	Setter
@@ -132,6 +146,13 @@ void SelectSpriteComponent::SetTextures(std::string tb, std::string t, std::stri
 		{
 			temp.isTop = false;
 		}
+
+		int iw, ih;
+		SDL_QueryTexture(temp.notSelTex, nullptr, nullptr, &iw, &ih);
+		temp.r.w = static_cast<int>(iw);
+		temp.r.h = static_cast<int>(ih);
+		temp.r.x = static_cast<int>(mOwner->GetCentralPosition().x - temp.r.w / 2);
+		temp.r.y = static_cast<int>(mOwner->GetCentralPosition().y - temp.r.h / 2 - 30 + (100 * i));
 
 		mSelectMenuTextures.emplace_back(temp);
 	}

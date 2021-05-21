@@ -3,7 +3,7 @@
 #include "Enemy.h"
 #include "Game.h"
 #include "BattleScene.h"
-#include "SceneManager.h"
+#include "SceneMgr.h"
 #include "BattleMessageWindow.h"
 #include "SE.h"
 #include "SpriteComponent.h"
@@ -22,8 +22,8 @@ Player::Player(Game* game, BattleScene* battleScene)
 	SetCentralPosition(mPos);
 	SetScale(mScale);
 
-	mCharacterImage = new SpriteComponent(this, SDL_FLIP_VERTICAL, mDrawOrder);
-	mCharacterImage->SetTexture(game->SetTexture(IMG_PLAYER));
+	mCharacterImg = new SpriteComponent(this, SDL_FLIP_VERTICAL, mDrawOrder);
+	mCharacterImg->SetTexture(game->SetTexture(IMG_PLAYER));
 
 	//	ステータスの設定
 	mStatus = { 2000,300,80,65,65, STRIKE | WINDOW | DARK ,true, "You" };
@@ -32,11 +32,16 @@ Player::Player(Game* game, BattleScene* battleScene)
 	mRTRecoverySpd = (2.0f * (float)mStatus.Speed) / 100.0f;	//	1.3
 
 	//	使える技
-	mArts.push_back(Arts{ "STRIKE",1.0f,STRIKE,SE(SE_BATTLE_SWORD) });
-	mArts.push_back(Arts{ "GUN",1.0f,SHOOT,SE(SE_BATTLE_GUN) });
+	mArts.push_back(Arts{ "STRIKE",1.0f,STRIKE,new SE(SE_BATTLE_SWORD) });
+	mArts.push_back(Arts{ "GUN",1.0f,SHOOT,new SE(SE_BATTLE_GUN) });
 
 	//	体力を表示するSpriteComponent
 	mCharacterHP = new BattleHP(this,battleScene);
+}
+
+Player::~Player()
+{
+
 }
 
 void Player::UpdateActor(float deltaTime)
@@ -49,15 +54,16 @@ void Player::UpdateActor(float deltaTime)
 	else
 	{
 		//	倒されたらSpriteを非表示にする
-		SDL_SetTextureAlphaMod(mCharacterImage->GetTexture(), 0);
+		SDL_SetTextureAlphaMod(mCharacterImg->GetTexture(), 0);
 
 		mBattleScene->SetFinished(true);
 	}
 }
 
-void Player::ActorInput(const uint8_t* keyState)
+void Player::ActorInput(const uint8_t* keyState, SDL_Event* event)
 {
-	if (mFromPreviousAttack == mCoolDown && keyState[SDL_SCANCODE_SPACE])
+	if (mFromAttack == mCoolDown
+		&& event->key.keysym.scancode == SDL_SCANCODE_SPACE)
 	{
 		if (mBattleScene->GetSelectMenu()->GetIsTop())
 		{
@@ -81,11 +87,11 @@ void Player::AttackEnemy(class Enemy* target,Arts arts)
 	str = mStatus.Name + " used " + arts.ArtsName + " to " + target->GetStatus().Name+" !!";
 	mBattleScene->GetMessageWindow()->LoadText(str);
 
-	arts.se.MakeSound();
+	arts.se->MakeSound();
 
 	target->RecvDamage(damage);
 
 	mHitWeakness = false;
-	mFromPreviousAttack = 0;
+	mFromAttack = 0;
 }
 

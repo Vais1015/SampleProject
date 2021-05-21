@@ -1,18 +1,18 @@
 #include "FilePath.h"
 #include "Game.h"
-#include "MessageWindow.h"
+#include "MsgWindow.h"
 #include "SpriteComponent.h"
 #include "SDL.h"
 #include "SDL_ttf.h"
 #include <iostream>
 #include <fstream>
 
-MessageWindow::MessageWindow(Game* game)
+MsgWindow::MsgWindow(Game* game)
     :Actor(game)
     , mOcuupied(false)
     ,mWindowSC(nullptr)
 {
-    std::cout << "Start MessageWindow" << std::endl;
+    std::cout << "Start MsgWindow" << std::endl;
 
     SetCentralPosition(Vector2((float)game->GetWindowWidth() / 2.0f,
         (float)game->GetWindowHeight() - ((float)game->GetWindowHeight() / 5.0f)));
@@ -21,13 +21,13 @@ MessageWindow::MessageWindow(Game* game)
     mWindowSC->SetTexture(game->SetTexture(IMG_WINDOW));
 }
 
-MessageWindow::~MessageWindow()
+MsgWindow::~MsgWindow()
 {
-    std::cout << ":::Delete MessageWindow" << std::endl;
+    std::cout << ":::Delete MsgWindow" << std::endl;
 }
 
 //  読み込んだテキストを１行ずつ表示
-void MessageWindow::DisplayMessageWindow(SDL_Renderer* renderer)
+void MsgWindow::DisplayMessageWindow(SDL_Renderer* renderer)
 {
     if (!mText.empty())
     {
@@ -58,22 +58,20 @@ void MessageWindow::DisplayMessageWindow(SDL_Renderer* renderer)
     }
 }
 
-void MessageWindow::ActorInput(const uint8_t* keyState)
+void MsgWindow::ActorInput(const uint8_t* keyState, SDL_Event* event)
 {
     float interval = (SDL_GetTicks() - GetGame()->GetInputTime()) / 1000.0f;
 
     //Spaceキーで表示しているテキストを削除し進める
     if (!mText.empty()
-        && keyState[SDL_SCANCODE_SPACE]
-        && interval > mInterval)
+        && event->key.keysym.scancode==SDL_SCANCODE_SPACE)
     {
         mText.erase(mText.begin());
-        GetGame()->SetInputTime();
     }
 }
 
 //テキストをテキストファイルからロード
-void MessageWindow::LoadText(std::string textFile) 
+void MsgWindow::LoadText(std::string textFile) 
 {
     std::ifstream ifs(textFile);
     if (!ifs)
@@ -93,7 +91,7 @@ void MessageWindow::LoadText(std::string textFile)
 }
 
 //  Getter
-bool MessageWindow::GetOccupied() const 
+bool MsgWindow::GetOccupied() const 
 {
     return mOcuupied;
 }
