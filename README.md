@@ -14,7 +14,7 @@ SDL2 libraries used in this program are "SDL2.lib","SDL2main.lib","SDL2_image.li
 When you link these libs, perhaps this program can work.
 At least, it worked on my PC.
 
-#Operation examination and Battle rule
+# Operation examination and Battle rule
 W key and S key : To move the cursor.
 Space key : To decide.
 
