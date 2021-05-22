@@ -20,7 +20,7 @@ Space key : To decide.
 
 Battle rule is simple. Attack and defeat a enemy. If you hit weakness of the enemy, enemy's attack speed become slow, and vice versa.
 
-# Lisence
+# License
 ## About Programs
 My program is under the "My" filter.
 Others, programs which are under the "Base" filter are used from Sanjay Madhav(2018).*"Game Programming in C++"*.
