@@ -21,20 +21,20 @@ Space key : To decide.
 Battle rule is simple. Attack and defeat a enemy. If you hit weakness of the enemy, enemy's attack speed become slow, and vice versa.
 
 # Lisence
-##About Programs
+## About Programs
 My program is under the "My" filter.
 Others, programs which are under the "Base" filter are used from Sanjay Madhav(2018).*"Game Programming in C++"*.
 These have the above copyright notice.
 
-##About Texts
+## About Texts
 I made all texts.
 
-##About Images
+## About Images
 I used character images from [Rド](http://rpgdot3319.g1.xrea.com/muz/002.html).
 Other images were downloaded from web sites which deliver free lisence material.
 I modified some images for ease to use.
 
-##About Sounds
+## About Sounds
 I used BGMs from [魔王魂](https://maou.audio/category/bgm/).
 SEs from [H/MIX](http://www.hmix.net/).
 
