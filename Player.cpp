@@ -32,7 +32,7 @@ Player::Player(Game* game, BattleScene* battleScene)
 	mRTRecoverySpd = (2.0f * (float)mStatus.Speed) / 100.0f;	//	1.3
 
 	//	Žg‚¦‚é‹Z
-	mArts.push_back(Arts{ "STRIKE",1.0f,STRIKE,new SE(SE_BATTLE_SWORD) });
+	mArts.push_back(Arts{ "STRIKE",1.8f,STRIKE,new SE(SE_BATTLE_SWORD) });
 	mArts.push_back(Arts{ "GUN",1.0f,SHOOT,new SE(SE_BATTLE_GUN) });
 
 	//	‘Ì—Í‚ð•\Ž¦‚·‚éSpriteComponent

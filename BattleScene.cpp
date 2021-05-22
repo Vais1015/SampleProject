@@ -99,7 +99,7 @@ int BattleScene::DamageCalculation(BattleCharacter* attacker,BattleCharacter* de
 	//	Žã“_‚É‚æ‚èæŽZ
 	if (arts.Attribute & defender->GetStatus().Weakness)
 	{
-		damage *= 1.5;
+		damage *= 1.2;
 
 		defender->SetHitWeakness(true);
 		defender->SetDisplayedHitWeakness(false);

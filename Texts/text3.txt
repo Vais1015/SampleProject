@@ -1,14 +1,16 @@
-騎士は彼を殺した
-我を殺しても幾千もの兵士が貴様を殺すだろう
-そう言い残すと　彼は動かなくなった
-騎士は一息ついて音を聞く
-金属が擦れる音
-八方から聞こえてくる
-幾千もの兵士たちが騎士を囲み槍を突き出した
-孤軍、奮闘
-幾百もの肉を斬り落とした
-しかし、遂に終わりがきた
-騎士は後ろから刺し抜かれ
-血反吐を吐きながら倒れた
-そうして
-騎士はあえなく死んでしまったのだ
+The knight killed him.
+Even if you killed me,
+Thousands of my servants will kill you.
+When he said so, he died.
+Taking a breath, the knight hear sounds.
+Sounds that metal rubs.
+They can be heard from all directions.
+Thousands of servents surrounded the knight,
+And sticked out spears.
+He struggled lonely,
+And slashed hundreds of servants.
+But, it's time to finish.
+The knight was pierced backward,
+Vomited blood and collapsed. 
+So...
+The knight died easily.

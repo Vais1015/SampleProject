@@ -78,7 +78,7 @@ protected:
 	float mRTRecoverySpd;
 
 	//	弱点にヒットすると次の技を出すまでリカバリースピードが遅くなる
-	float mSlowDown = 0.7f;
+	float mSlowDown = 0.5f;
 	bool mHitWeakness;
 	bool mDisplayedHitWeaknessMsg;
 };
